@@ -36,8 +36,6 @@ gem "redis", "~> 4.0"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
-gem "wombat"
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
@@ -49,6 +47,14 @@ gem "bootsnap", ">= 1.4.4", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
+
+gem "mocha"
+gem "pry", "0.14.0"
+gem "pry-byebug", github: "deivid-rodriguez/pry-byebug", ref: "b16dea0"
+gem "pry-doc"
+gem "pry-rails"
+gem "pry-stack_explorer"
+gem "pry-theme"
 
 group :development, :test do
   # See https://edgeguides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
