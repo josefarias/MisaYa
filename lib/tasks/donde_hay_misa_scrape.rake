@@ -5,6 +5,6 @@ namespace :donde_hay_misa do
   task scrape: :environment do
     scraper = DondeHayMisaScraper.new
     scraper.scrape!
-    pp scraper.parishes
+    pp scraper.states
   end
 end
