@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "net/http"
 
 class DondeHayMisaScraper
@@ -62,9 +63,9 @@ class DondeHayMisaScraper
       mass_data = mass.strip.split("\n").map(&:strip)
 
       {
-        type: TYPES[mass_data[0].strip],
-        day: DAYS[mass_data[1].strip],
-        time: mass_data[2].strip
+        type: TYPES[mass_data[0]],
+        day: DAYS[mass_data[1]],
+        time: mass_data[2]
       }
     end
 

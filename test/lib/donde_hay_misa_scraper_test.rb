@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'test_helper'
-require 'donde_hay_misa_scraper'
+require "test_helper"
+require "donde_hay_misa_scraper"
 
 # NOTE: Some of these tests are for private methods. We usually wouldn't test
 #   private methods. But, in this case, we think they're useful in case the
@@ -75,28 +75,28 @@ class DondeHayMisaScraperTest < ActiveSupport::TestCase
   private
 
   MASSES = [
-    {:type=>:dominical, :day=>:sunday, :time=>"09:00 AM"},
-    {:type=>:kid_friendly, :day=>:sunday, :time=>"10:30 AM"},
-    {:type=>:dominical, :day=>:sunday, :time=>"10:30 AM"},
-    {:type=>:dominical, :day=>:sunday, :time=>"11:30 AM"},
-    {:type=>:dominical, :day=>:sunday, :time=>"01:00 PM"},
-    {:type=>:dominical, :day=>:sunday, :time=>"06:00 PM"},
-    {:type=>:dominical, :day=>:sunday, :time=>"07:00 PM"},
-    {:type=>:dominical, :day=>:sunday, :time=>"08:00 PM"},
-    {:type=>:daily, :day=>:monday, :time=>"11:00 AM"},
-    {:type=>:daily, :day=>:monday, :time=>"07:00 PM"},
-    {:type=>:daily, :day=>:tuesday, :time=>"11:00 AM"},
-    {:type=>:daily, :day=>:tuesday, :time=>"07:00 PM"},
-    {:type=>:daily, :day=>:wednesday, :time=>"11:00 AM"},
-    {:type=>:daily, :day=>:wednesday, :time=>"07:00 PM"},
-    {:type=>:daily, :day=>:thursday, :time=>"11:00 AM"},
-    {:type=>:daily, :day=>:thursday, :time=>"07:00 PM"},
-    {:type=>:daily, :day=>:friday, :time=>"11:00 AM"},
-    {:type=>:daily, :day=>:friday, :time=>"07:00 PM"},
-    {:type=>:daily, :day=>:saturday, :time=>"11:00 AM"},
-    {:type=>:dominical, :day=>:saturday, :time=>"05:00 PM"},
-    {:type=>:dominical, :day=>:saturday, :time=>"06:00 PM"},
-    {:type=>:dominical, :day=>:saturday, :time=>"07:00 PM"}
+    {type: :dominical, day: :sunday, time: "09:00 AM"},
+    {type: :kid_friendly, day: :sunday, time: "10:30 AM"},
+    {type: :dominical, day: :sunday, time: "10:30 AM"},
+    {type: :dominical, day: :sunday, time: "11:30 AM"},
+    {type: :dominical, day: :sunday, time: "01:00 PM"},
+    {type: :dominical, day: :sunday, time: "06:00 PM"},
+    {type: :dominical, day: :sunday, time: "07:00 PM"},
+    {type: :dominical, day: :sunday, time: "08:00 PM"},
+    {type: :daily, day: :monday, time: "11:00 AM"},
+    {type: :daily, day: :monday, time: "07:00 PM"},
+    {type: :daily, day: :tuesday, time: "11:00 AM"},
+    {type: :daily, day: :tuesday, time: "07:00 PM"},
+    {type: :daily, day: :wednesday, time: "11:00 AM"},
+    {type: :daily, day: :wednesday, time: "07:00 PM"},
+    {type: :daily, day: :thursday, time: "11:00 AM"},
+    {type: :daily, day: :thursday, time: "07:00 PM"},
+    {type: :daily, day: :friday, time: "11:00 AM"},
+    {type: :daily, day: :friday, time: "07:00 PM"},
+    {type: :daily, day: :saturday, time: "11:00 AM"},
+    {type: :dominical, day: :saturday, time: "05:00 PM"},
+    {type: :dominical, day: :saturday, time: "06:00 PM"},
+    {type: :dominical, day: :saturday, time: "07:00 PM"}
   ].freeze
   PARISH_URLS = [
     "http://dondehaymisa.com/parroquia/31",
