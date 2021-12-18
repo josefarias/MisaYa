@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <title>Donde Hay Misa</title>
+        <meta content="Admin Espacios" name="Sistema de Documentación Espacios" />
+        <meta content="Espacios" name="Espacios" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <link rel="shortcut icon" href="http://dondehaymisa.com/assets/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="http://dondehaymisa.com/assets/images/favicon.ico" type="image/x-icon">
+
+        <!--Morris Chart CSS -->
+<link rel="stylesheet" href="http://dondehaymisa.com/assets/plugins/morris/morris.css">
+
+<link href="http://dondehaymisa.com/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="http://dondehaymisa.com/assets/css/icons.css" rel="stylesheet" type="text/css">
+<link href="http://dondehaymisa.com/assets/css/style.css" rel="stylesheet" type="text/css">
+<link href="http://dondehaymisa.com/assets/css/sweetalert.css" rel="stylesheet" type="text/css">
+<link href="http://dondehaymisa.com/assets/css/variables.css" rel="stylesheet" type="text/css">
+
+<!-- DataTables -->
+<link href="http://dondehaymisa.com/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<link href="http://dondehaymisa.com/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="http://dondehaymisa.com/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="http://dondehaymisa.com/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="http://dondehaymisa.com/assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="http://dondehaymisa.com/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="http://dondehaymisa.com/assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet" />
+<link href="http://dondehaymisa.com/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+<link href="http://dondehaymisa.com/assets/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+<style>
+    #frmHtmlBody{
+        max-height: 500px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    .timepicker input.form-control[readonly], .timepicker.form-control[readonly] {
+        background-color: #fafafa !important;
+    }
+    .collapse-link {
+        display: block;
+        color: #fff !important;
+        padding: 10px 10px;
+        font-weight: 600;
+        line-height: 30px;
+        font-size: 20px;
+        background: #f27f00 !important;
+    }
+    #churchAccordion .panel {
+        background: none;
+        box-shadow: none;
+        margin-bottom: 10px;
+    }
+    .collapsible-div {
+        padding: 10px;
+        background: #e7e7ea;
+    }
+    .collapse-link[data-toggle="collapse"]:after {
+        font-family: 'Glyphicons Halflings';
+        content: "\e114";
+        /* "play" icon */
+        float: right;
+        color: #fff;
+        font-size: 18px;
+        line-height: 28px;
+    }
+    .collapse-link[data-toggle="collapse"].collapsed:after {
+        /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
+    .parroquio_image {
+        max-width: 50%;
+    }
+</style>
+    </head>
+
+    <body>
+        <div class="spiner-example hide">
+            <div class="sk-spinner sk-spinner-chasing-dots">
+                <div class="sk-dot1"></div>
+                <div class="sk-dot2"></div>
+            </div>
+        </div>
+        <div id="wrapper">
+            <div class="topbar">
+                <!-- Button mobile view to collapse sidebar menu -->
+<div class="navbar navbar-default" role="navigation" style="background-color:#85252a; color:#FFFFFF;">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="http://dondehaymisa.com">
+                <img src="http://dondehaymisa.com/assets/images/appostolica-logo.png" style="margin-top:2%; margin-left:2%; width:45px;" alt="" class="img-circle" />
+                <!--<img src="http://dondehaymisa.com/assets/images/logo2.jpg" style="margin-top:2%; margin-left:2%; width:45px;" alt="" class="img-circle" />-->
+            </a>
+            <!-- <button type="button" class="button-menu-mobile open-left waves-effect waves-light"> -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-front" aria-expanded="false" aria-controls="menu-front">
+                <i class="ion-navicon"></i>
+            </button>
+            <span class="clearfix"></span>
+        </div>
+
+        <div id="menu-front" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://dondehaymisa.com">Inicio</a></li>
+                <!--<li><a href="http://dondehaymisa.com/misal">Misal</a></li>-->
+                <li><a href="https://www.appostolica.com/">Misal</a></li>
+                <li><a href="http://dondehaymisa.com/contacto">Soporte-contacto</a></li>
+                <!--<li><a href="http://dondehaymisa.com/hacer-donativo">Hacer Donativo</a></li>-->
+                <!-- <li class="dropdown">
+                    <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
+
+                        <span class="profile-username">
+                            Menú <span class="caret"></span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0)"> Perfil</a></li>
+                        <li class="divider"></li>
+
+                        <li><a href="http://dondehaymisa.com/language/es"><img src="http://dondehaymisa.com/assets/images/flag/flag_mex.png" width="16px" /> Español</a></li>
+                        <li class="divider"></li>
+                        <li><a href="http://dondehaymisa.com/language/en"><img src="http://dondehaymisa.com/assets/images/flag/flag_us.png" width="16px" />  Ingles</a></li>
+                        <li class="divider"></li>
+                        <li><a href="http://dondehaymisa.com/admin/logout"
+                            onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();"> Terminar Sesión</a></li>
+                    </ul>
+                    <form id="logout-form" action="http://dondehaymisa.com/admin/logout" method="POST" style="display: none;">
+                            <input type="hidden" name="_token" value="YJkSP4d7catjWkLiYG3kOtBK9SblSbJo0TrtqEBz">
+                        </form>
+                </li> -->
+                <!--<li>
+                    <a href="http://dondehaymisa.com/misal/selector" style="color:#FFFFFF;" data-target="#appModal" data-toggle="modal" data-keyboard="false"><i class="ion-search"></i></a>
+                </li>-->
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+            </div>
+
+            <!-- Begin page -->
+            <div class="content-page" style="margin-left:0;">
+                
+<div class="content">
+    <div class="page-content-wrapper" style="margin-bottom: 50px;">
+        <div class="col-xs-12 col-md-offset-1 col-md-5 col-sm-12">
+            <!-- <h2> Mater Admirabilis</h2> -->
+            <h2>Parroquia Mater Admirabilis</h2>
+            <p class="search-results">
+                <strong class="hide">Diosesis:</strong> <em>Arquidiócesis de Monterrey</em>
+            </p>
+            <p class="search-results">
+                <strong>Dirección:</strong> <em>Av. Vasconcelos No. 264 Pte., Col. Del Valle, C.P. 66220, San Pedro Garza García, Nuevo León, México</em>
+            </p>
+            <p class="search-results">
+                <strong>Teléfono:</strong> <a href="tel:++528183386807"<em>+528183386807</em></a>
+            </p>
+                        <p class="search-results">
+                                <strong>Fiesta Patronal:</strong> <em>Octubure 20</em>
+            </p>
+                        <p class="search-results">
+                <strong>Sitio Web:</strong> <em>
+                                        N/A
+                                    </em>
+            </p>
+            <div class="row col-lg-12">
+                <img src="https://www.dondehaymisa.com/parishes/photos/original_08112021_094744_d241e264388d5658decf5235e2ad0bcd.png" border="0" class="img-responsive parroquio_image" />
+            </div>
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-md-6">
+                    <h3 style="color: #F27F00;">¿Qué deseas editar?</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="javascript:void(0);" class="btnCommonEditar" id="btnUpdateDatosGenerales" data-index="0" data-option="1" style="color: #F27F00; margin-bottom: 10px;">Datos Generales</a></li>
+                        <li style="margin-bottom: 10px;"><a href="javascript:void(0);" class="btnCommonEditar" id="btnUpdateDireccion" data-index="1" data-option="2" style="color: #F27F00;">Dirección</a></li>
+                        <li style="margin-bottom: 10px;"><a href="javascript:void(0);" class="btnCommonEditar" id="btnUpdateServicios" data-index="2" data-option="3" style="color: #F27F00;">Servicios</a></li>
+                        <li style="margin-bottom: 10px;"><a href="javascript:void(0);" class="btnCommonEditar" id="btnUpdateHorariosMisas" data-index="3" data-option="4" style="color: #F27F00;">Horarios de Misas</a></li>
+                        <li style="margin-bottom: 10px;"><a href="javascript:void(0);" class="btnCommonEditar" id="btnUpdatHorariosConfesiones" data-index="4" data-option="5" style="color: #F27F00;">Horarios de confesiones</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-5 col-sm-12">
+            <br /><br />
+                        
+            <div class="row">
+                <div id="churchAccordion">
+                                                <div class="col-xs-12 panel">
+                    <a class="collapse-link" data-toggle="collapse" data-parent="#churchAccordion" data-target="#collapseMisas" role="button" aria-expanded="true" aria-controls="collapseMisas">Horarios de misas</a>
+                    <div class="table-responsive collapse in" id="collapseMisas" role="tabpanel" aria-labelledby="collapseMisas">
+                        <div class="collapsible-div">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>Día</th>
+                                        <th>Hora</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                                                        <tr>
+                                        <td>Precepto dominical</td>
+                                        <td>Domingo</td>
+                                        <td>09:00 AM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Con niños</td>
+                                        <td>Domingo</td>
+                                        <td>10:30 AM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Precepto dominical</td>
+                                        <td>Domingo</td>
+                                        <td>10:30 AM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Precepto dominical</td>
+                                        <td>Domingo</td>
+                                        <td>11:30 AM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Precepto dominical</td>
+                                        <td>Domingo</td>
+                                        <td>01:00 PM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Precepto dominical</td>
+                                        <td>Domingo</td>
+                                        <td>06:00 PM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Precepto dominical</td>
+                                        <td>Domingo</td>
+                                        <td>07:00 PM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Precepto dominical</td>
+                                        <td>Domingo</td>
+                                        <td>08:00 PM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Diaria</td>
+                                        <td>Lunes</td>
+                                        <td>11:00 AM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Diaria</td>
+                                        <td>Lunes</td>
+                                        <td>07:00 PM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Diaria</td>
+                                        <td>Martes</td>
+                                        <td>11:00 AM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Diaria</td>
+                                        <td>Martes</td>
+                                        <td>07:00 PM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Diaria</td>
+                                        <td>Miércoles</td>
+                                        <td>11:00 AM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Diaria</td>
+                                        <td>Miércoles</td>
+                                        <td>07:00 PM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Diaria</td>
+                                        <td>Jueves</td>
+                                        <td>11:00 AM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Diaria</td>
+                                        <td>Jueves</td>
+                                        <td>07:00 PM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Diaria</td>
+                                        <td>Viernes</td>
+                                        <td>11:00 AM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Diaria</td>
+                                        <td>Viernes</td>
+                                        <td>07:00 PM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Diaria</td>
+                                        <td>Sábado</td>
+                                        <td>11:00 AM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Precepto dominical</td>
+                                        <td>Sábado</td>
+                                        <td>05:00 PM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Precepto dominical</td>
+                                        <td>Sábado</td>
+                                        <td>06:00 PM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Precepto dominical</td>
+                                        <td>Sábado</td>
+                                        <td>07:00 PM</td>
+                                    </tr>
+                                                                    </tbody>
+                            </table>
+                        </div>
+                    </div>                    
+                </div>                
+                                                                <div class="col-xs-12 panel">
+                    <a class="collapse-link collapsed" data-toggle="collapse" data-parent="#churchAccordion" data-target="#collapseConfessions" role="button" aria-expanded="false" aria-controls="collapseConfessions">Horarios de confesiones</a>
+                    <div class="table-responsive collapse" id="collapseConfessions" role="tabpanel" aria-labelledby="collapseConfessions">
+                        <div class="collapsible-div">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Día</th>
+                                        <th>Hora de Inicio</th>
+                                        <th>Hora de Fin</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                                                        <tr>
+                                        <td>Domingo</td>
+                                        <td>11:30 AM</td>
+                                        <td>12:30 PM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Domingo</td>
+                                        <td>01:00 PM</td>
+                                        <td>01:45 PM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Domingo</td>
+                                        <td>07:00 PM</td>
+                                        <td>07:45 PM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Jueves</td>
+                                        <td>07:30 PM</td>
+                                        <td>08:30 PM</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Sábado</td>
+                                        <td>06:00 PM</td>
+                                        <td>07:00 PM</td>
+                                    </tr>
+                                                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                                  
+                </div>
+            </div>      
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+            </div>
+            <!-- END wrapper -->
+        </div>
+
+        <div id="footer-front" class="footer">
+            <p>
+                Dónde Hay Misa es una página y una aplicación de la Arquidiócesis de Monterrey
+                <br />
+                <a href="http://arquidiocesismty.org" target="_blank">arquidiocesismty.org</a> - <a href="mailto:dhm@arquidiocesismty.org">dhm@arquidiocesismty.org</a>
+            </p>
+        </div>
+
+        <div id="appModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header"></div>
+
+                    <div class="modal-body">
+                        <img src="http://dondehaymisa.com/assets/images/loading.gif" style="width:80%;" />
+                    </div>
+
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function show_loader(flag)
+            {                    
+                if(flag)
+                {
+                    $(".spiner-example").removeClass('hide');
+                }
+                else
+                {
+                    $(".spiner-example").addClass('hide');
+                }
+            }
+        </script>
+        <!-- Scripts de inicializacion  -->
+        <script src="http://dondehaymisa.com/assets/js/jquery.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/bootstrap.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/modernizr.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/detect.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/fastclick.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/jquery.slimscroll.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/jquery.blockUI.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/waves.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/wow.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/jquery.nicescroll.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/jquery.scrollTo.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/sweetalert.min.js"></script>
+        
+
+        <!-- Datatables-->
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/dataTables.bootstrap.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/buttons.bootstrap.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/jszip.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/pdfmake.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/vfs_fonts.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/buttons.html5.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/buttons.print.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/dataTables.keyTable.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/dataTables.responsive.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/responsive.bootstrap.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/dataTables.scroller.min.js"></script>
+        
+        <!-- Custom filesystem-->
+        <script src="http://dondehaymisa.com/assets/plugins/bootstrap-filestyle/js/bootstrap-filestyle.min.js" type="text/javascript"></script>
+
+        <script src="http://dondehaymisa.com/assets/js/app.js"></script><!-- Modal -->
+<div class="modal fade" id="modalUpdateDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalUpdateDetailsTitle">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmChurchChangesForm">
+                    <input type="hidden" name="id" value="42" />
+                    <input type="hidden" name="option" id="frmOption" value="" />
+                    <div id="frmHtmlBody"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="submitChurchChanges">Grabar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <script src="http://dondehaymisa.com/assets/plugins/timepicker/bootstrap-timepicker.js"></script>
+<script src="http://dondehaymisa.com/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="http://dondehaymisa.com/assets/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+<script>
+    var minImgHeight = 250;
+    var minImgWidth = 250;
+    var invalidImg = 0;
+    var parish_id = 42;
+    var menu_arr = [
+        'Datos Generales',
+	'Dirección',
+	'Servicios',
+	'Horarios de Misas',
+	'Horarios de confesiones'
+    ];
+    var church_foto_base64;
+    $('body').on('click', '.btnCommonEditar', function(){
+        show_loader(true);
+        let msg_title = menu_arr[$(this).data('index')];  
+        let option = $(this).data('option');      
+        $.ajax({
+            type: 'GET',            
+            async: true,            
+            url: 'http://dondehaymisa.com' + '/parroquia/'+ parish_id +'/form?option=' + $(this).data('option'),
+            headers: {
+                'X-CSRF-TOKEN': 'YJkSP4d7catjWkLiYG3kOtBK9SblSbJo0TrtqEBz'
+            },
+            success: function (response) {
+                show_loader(false);
+                if(response.flag == 1)
+                {
+                    $('#frmOption').val(option);
+                    $("#frmHtmlBody").html(response.data);
+                    $('#modalUpdateDetailsTitle').html(msg_title);
+                    $("#modalUpdateDetails").modal('show');
+                    if(option > 2)
+                    {
+                        $('.timepicker').timepicker({
+                            minuteStep: 1,
+                            defaultTime: '',
+                            showInputs: false,
+                            showMeridian: true,
+                        });
+                        $('#submitChurchChanges').addClass('hide');
+                    }                    
+                    else
+                    {
+                        $('#submitChurchChanges').removeClass('hide');
+                    }
+                    $('#fiesta-patronal-edit-date').datepicker({
+                        autoclose: true,
+                        todayHighlight: true,
+                        format: "dd/mm/yyyy",
+                    });
+
+                    $('#fiesta-patronal-edit-span').click(function (){
+                        $('#fiesta-patronal-edit-date').trigger('focus');
+                    });
+
+                    $("#church_foto").filestyle({buttonText: "Seleccione archivo"});
+                }
+            },
+            error: function (response) {
+                show_loader(false);
+            }
+        });
+    });
+
+    $('body').on('change', '#address_country_id', function() {
+        $.ajax({
+            type: 'GET',            
+            async: true,            
+            url: 'http://dondehaymisa.com/api/v1' + '/listStates?country_id=' + $('#address_country_id').val(),
+            success: function (response) {
+                // Reset the state combo box on changing country
+                $('#address_state_id').empty();
+                let strOpcion = '<option value="">Seleccione estado</option>';
+                $('#address_state_id').append(strOpcion);
+                $('#address_state_id').val('');
+                // Reset the city combo box on changing country
+                $('#address_city_id').empty();
+                strOpcion = '<option value="">Ciudad selecta</option>';
+                $('#address_city_id').append(strOpcion);
+                $('#address_city_id').val('');
+                // Append new states to the list
+                $.each(response.data.estados, function (idx, val){                                        
+                    let strOpcion = '<option value="' + val.id + '">' + val.label + '</option>';
+                    $('#address_state_id').append(strOpcion);
+                });
+            },
+            error: function (response) {
+
+            }
+        });    
+    });
+    $('body').on('change', '#address_state_id', function() {
+        $.ajax({
+            type: 'GET',            
+            async: true,            
+            url: 'http://dondehaymisa.com/api/v1' + '/listCities?state_id=' + $('#address_state_id').val(),
+            success: function (response) {
+                // Reset the city combo box on changing state
+                $('#address_city_id').empty();
+                let strOpcion = '<option value="">Ciudad selecta</option>';
+                $('#address_city_id').append(strOpcion);
+                $('#address_city_id').val('');
+                $.each(response.data.municipios, function (idx, val){                                        
+                    let strOpcion = '<option value="' + val.id + '">' + val.label + '</option>';
+                    $('#address_city_id').append(strOpcion);
+                });                   
+            },
+            error: function (response) {
+
+            }
+        });    
+    });
+    // Function to validate the form
+    function validateFrm(form)
+    {
+        var listv = 0;
+        var msg = '';
+        $('#' + form).find(':input').each(function (){
+            if ($(this).attr("valida") == "SI" && ($(this).val() == "" || $(this).val() == "null")) {
+                listv=1;
+
+                $('#input'+this.id).addClass('has-error');
+                msg += $(this).attr('cadena')+'\n';
+
+                //$(this).val($(this).val().toUpperCase());
+            } else {
+                $('#input'+this.id).removeClass('has-error');
+
+                if ($(this).attr("valida") == "SI") {
+                    //$(this).val($(this).val().toUpperCase());
+                }
+            }
+            if ($(this).attr("regex") == "SI" && $(this).val() != "") {
+                let re = $(this).attr("regex-content");
+                re = new RegExp(re);
+                if (!re.test($(this).val())) {
+                    listv=2;
+                    $('#input'+this.id).addClass('has-error');
+                    msg += $(this).attr('regex-message')+'\n';
+                }
+                else {
+                    $('#input'+this.id).removeClass('has-error');
+                }
+            }
+        });
+        if(invalidImg == 1){
+            listv = 1;
+            msg += '- La imagen es demasiado corta';
+        }
+        if (listv == 1 || listv == 2) {
+            swal({
+                title:'Aviso!!',
+                text:msg,
+                type:'error',
+                timer: 4000,
+                confirmButtonColor:'red',
+                confirmButtonText:'OK'
+            });
+            return false;
+        } else {
+            return true;
+        }
+    }
+    $('body').on('click', '#submitChurchChanges', function() {
+        if (validateFrm('frmChurchChangesForm')) {
+            var confirmFields = "";
+            var tempData = getFormData($('#frmChurchChangesForm'));
+            if (tempData['option'] == 1) {
+                confirmFields += "\n\nDiócesis: " + (($("#dioceses_id option:selected").text() != '') ? $("#dioceses_id option:selected").text() : '-');
+                confirmFields += "\nTipo de Iglesia: " + (($("#parish_type option:selected").text() != '') ? $("#parish_type option:selected").text() : '-');
+                confirmFields += "\nNombre: " + (($("#name").val() != '') ? $("#name").val() : "-");
+                confirmFields += "\nTelefono 1: " + (($("#telephone").val() != '') ? $("#telephone").val() : "-");
+                confirmFields += "\nTelefono 2: " + (($("#telephone2").val() != '') ? $("#telephone2").val() : "-");
+                confirmFields += "\nFacebook: " + (($("#facebook").val() != '') ? $("#facebook").val() : "-");
+                confirmFields += "\nTwitter: " + (($("#twitter").val() != '') ? $("#twitter").val() : "-");
+                confirmFields += "\nCorreo Electronico: " + (($("#email").val() != '') ? $("#email").val() : "-");
+                confirmFields += "\nSitio Web: " + (($("#website").val() != '') ? $("#website").val() : "-");
+                confirmFields += "\nFiesta Patronal: " + (($("#fiesta-patronal-edit-date").val() != '') ? $("#fiesta-patronal-edit-date").val() : "-");
+            }
+            else {
+                confirmFields += "\n\nCalle y numbero: " + (($("#street_number").val() != '') ? $("#street_number").val() : "-");
+                confirmFields += "\nColonia: " + (($("#colony").val() != '') ? $("#colony").val() : "-");
+                confirmFields += "\nCodigo postal: " + (($("#postcode").val() != '') ? $("#postcode").val() : "-");
+                confirmFields += "\nApartado postal: " + (($("#po_box").val() != '') ? $("#po_box").val() : "-");
+                confirmFields += "\nPais: " + (($("#address_country_id option:selected").text() != '') ? $("#address_country_id option:selected").text() : '-');
+                confirmFields += "\nEstado: " + (($("#address_state_id option:selected").text() != '') ? $("#address_state_id option:selected").text() : '-');
+                confirmFields += "\nMunicipio: " + (($("#address_city_id option:selected").text() != '') ? $("#address_city_id option:selected").text() : '-');
+            }
+            swal({
+                title: "¿Confirmar?",
+                text: "¿Estás seguro de que deseas editar esta información?"+confirmFields,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#2286f5",
+                confirmButtonText: "Aceptar",
+                cancelButtonText: "Cancelar",
+                closeOnConfirm: false,  
+                closeOnCancel: false },
+                function (isConfirm){
+                    if (isConfirm) {
+                        if (tempData['option'] == 1) {
+                            // Check if the file is image
+                            var filename = $("#church_foto").val();
+                            if (filename != '') {
+                                var extension = filename.replace(/^.*\./, '');
+                                if (extension == filename) {
+                                    extension = '';
+                                } else {
+                                    extension = extension.toLowerCase();
+                                }
+                                if (extension == 'jpg' || extension == 'jpeg' || extension == 'png' || extension == 'gif') {
+                                    tempData['foto'] = church_foto_base64;
+                                }
+                                else {
+                                    swal({
+                                        title: 'Aviso!!',
+                                        text: "Por favor seleccione una imagen de iglesia válida.",
+                                        type: 'error',
+                                        timer: 4000,
+                                        confirmButtonColor: 'red',
+                                        confirmButtonText: 'OK'
+                                    });
+                                    return false;
+                                }
+                            }
+                        }
+                        show_loader(true);
+                        $.ajax({
+                            type: 'POST',            
+                            async: true,            
+                            url: 'http://dondehaymisa.com/api/v1' + '/parish/edit',
+                            data: tempData,
+                            success: function (response) {
+                                show_loader(false);
+                                swal('Success!', response.message, 'success');
+                                $("#modalUpdateDetails").modal('hide');
+                            },
+                            error: function (response) {
+                                show_loader(false);
+                                swal('Error!', "Algo salió mal.", 'error');
+                            }
+                        });
+                    } else {
+                        swal.close();
+                    }
+            });          
+        }
+    });
+
+    $('body').on('click', '.btnRemoveHorarios, .btnRemoveConfesion, .btnRemoveServicios', function(){
+        let this_horario_id = $(this).data('id');
+        let curr_option = $(this).data('fid');
+        let alert_msg = '';
+        
+        if(curr_option == 3)
+        {
+            alert_msg = '¿Está seguro de borrar el horario de misa?';
+        }
+        else if(curr_option == 4)
+        {
+            alert_msg = '¿Está seguro de borrar el horario de confesion?';
+        }
+        else if(curr_option == 1)
+        {
+             alert_msg = '¿Está seguro de borrar el servicio?';
+        }
+        
+        swal({
+            title: "¿Confirmar?",
+            text: alert_msg,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Borrar",
+            cancelButtonText: "Cancelar",
+            closeOnConfirm: false,  
+            closeOnCancel: false },
+            function (isConfirm){
+                if (isConfirm) {
+                    show_loader(true);
+                    $.ajax({
+                        type: 'DELETE',
+                        async: true,
+                        url: 'http://dondehaymisa.com/api/v1' + '/parish/submodule/delete',
+                        data: {id: this_horario_id, option: curr_option},
+                        success: function (response) {
+                            show_loader(false);
+                            swal('Success!', response.message, 'success');
+                            $("#modalUpdateDetails").modal('hide');
+                        },
+                        error: function (response) {
+                            show_loader(false);
+                            swal('Error!', "Algo salió mal.", 'error');
+                        }
+                    });
+                } else {
+                    swal.close();
+                }
+        });
+    });    
+    $('body').on('click', '#addMisasButton', function() {
+        if (validateFrm('frmChurchChangesForm')) {
+            var confirmFields = "";
+            $('#frmOption').val('6');
+            let frmChurchChangesFormValues = getFormData($('#frmChurchChangesForm'));
+            confirmFields += "\n\nTipo: " + (($("#mass_type option:selected").text() != '') ? $("#mass_type option:selected").text() : '-');
+            confirmFields += "\nDía: " + (($("#week_day option:selected").text() != '') ? $("#week_day option:selected").text() : '-');
+            confirmFields += "\nHora: " + (($("#hora").val() != '') ? $("#hora").val() : "-");
+            swal({
+                title: "¿Confirmar?",
+                text: "¿Estás seguro de que deseas añadir esta información?"+confirmFields,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#2286f5",
+                confirmButtonText: "Aceptar",
+                cancelButtonText: "Cancelar",
+                closeOnConfirm: false,  
+                closeOnCancel: false },
+                function (isConfirm){
+                    if (isConfirm) {
+                        // frmChurchChangesFormValues.hour = convert24hTo12h(frmChurchChangesFormValues.hour.toString() + ":00");
+                        show_loader(true);
+                        $.ajax({
+                            type: 'POST',            
+                            async: true,            
+                            url: 'http://dondehaymisa.com/api/v1' + '/parish/edit',
+                            data: frmChurchChangesFormValues,
+                            success: function (response) {
+                                show_loader(false);
+                                swal('Success!', response.message, 'success');
+                                $("#modalUpdateDetails").modal('hide');
+                            },
+                            error: function (response) {
+                                show_loader(false);
+                                swal('Error!', "Algo salió mal.", 'error');
+                            }
+                        });
+                    } else {
+                        swal.close();
+                    }
+            });
+        }
+    });
+    $('body').on('click', '#addConfesioneButton', function() {
+        if (validateFrm('frmChurchChangesForm')) {
+            var confirmFields = "";
+            $('#frmOption').val('7');
+            let frmChurchChangesFormValues = getFormData($('#frmChurchChangesForm'));
+            confirmFields += "\n\nDía: " + (($("#week_day option:selected").text() != '') ? $("#week_day option:selected").text() : '-');
+            confirmFields += "\nHora de Inicio: " + (($("#start_time").val() != '') ? $("#start_time").val() : "-");
+            confirmFields += "\nHora de Fin: " + (($("#end_time").val() != '') ? $("#end_time").val() : "-");
+            swal({
+                title: "¿Confirmar?",
+                text: "¿Estás seguro de que deseas añadir esta información?"+confirmFields,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#2286f5",
+                confirmButtonText: "Aceptar",
+                cancelButtonText: "Cancelar",
+                closeOnConfirm: false,  
+                closeOnCancel: false },
+                function (isConfirm){
+                    if (isConfirm) {
+                        // frmChurchChangesFormValues.start_time = convert24hTo12h(frmChurchChangesFormValues.start_time.toString() + ":00");
+                        // frmChurchChangesFormValues.end_time = convert24hTo12h(frmChurchChangesFormValues.end_time.toString() + ":00");
+                        show_loader(true);
+                        $.ajax({
+                            type: 'POST',            
+                            async: true,            
+                            url: 'http://dondehaymisa.com/api/v1' + '/parish/edit',
+                            data: frmChurchChangesFormValues,
+                            success: function (response) {
+                                show_loader(false);
+                                swal('Success!', response.message, 'success');
+                                $("#modalUpdateDetails").modal('hide');
+                            },
+                            error: function (response) {
+                                show_loader(false);
+                                swal('Error!', "Algo salió mal.", 'error');
+                            }
+                        });
+                    } else {
+                        swal.close();
+                    }
+            });
+        }
+    });
+    $('body').on('click', '#addServicioButton', function() {
+        if (validateFrm('frmChurchChangesForm')) {
+            var confirmFields = "";
+            $('#frmOption').val('4');
+            let frmChurchChangesFormValues = getFormData($('#frmChurchChangesForm'));
+            confirmFields += "\n\nTipo: " + (($("#type option:selected").text() != '') ? $("#type option:selected").text() : '-');
+            confirmFields += "\nDía: " + (($("#week_day option:selected").text() != '') ? $("#week_day option:selected").text() : '-');
+            confirmFields += "\nHora de Inicio: " + (($("#start_time").val() != '') ? $("#start_time").val() : "-");
+            confirmFields += "\nHora de Fin: " + (($("#end_time").val() != '') ? $("#end_time").val() : "-");
+            swal({
+                title: "¿Confirmar?",
+                text: "¿Estás seguro de que deseas añadir esta información?"+confirmFields,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#2286f5",
+                confirmButtonText: "Aceptar",
+                cancelButtonText: "Cancelar",
+                closeOnConfirm: false,  
+                closeOnCancel: false },
+                function (isConfirm){
+                    if (isConfirm) {
+                        // frmChurchChangesFormValues.start_time = convert24hTo12h(frmChurchChangesFormValues.start_time.toString() + ":00");
+                        // frmChurchChangesFormValues.end_time = convert24hTo12h(frmChurchChangesFormValues.end_time.toString() + ":00");
+                        show_loader(true);
+                        $.ajax({
+                            type: 'POST',            
+                            async: true,            
+                            url: 'http://dondehaymisa.com/api/v1' + '/parish/edit',
+                            data: frmChurchChangesFormValues,
+                            success: function (response) {
+                                show_loader(false);
+                                swal('Success!', response.message, 'success');
+                                $("#modalUpdateDetails").modal('hide');
+                            },
+                            error: function (response) {
+                                show_loader(false);
+                                swal('Error!', "Algo salió mal.", 'error');
+                            }
+                        });
+                    } else {
+                        swal.close();
+                    }
+            });
+        }
+    });
+    // Function to convert 24 hour format to 12 hour format of time
+    function convert24hTo12h(time) {
+        // Check correct time format and split into components
+        time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+        if (time.length > 1) { // If time format correct
+            time = time.slice(1);  // Remove full string match value
+            time[3] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+            time[4] = '';
+            time[5] = '';
+            time[0] = +time[0] % 12 || 12; // Adjust hours
+            time[0] = (time[0] >= 1 && time[0] <= 9) ? ('0' + time[0]) : time[0];
+        }
+        return time.join(''); // return adjusted time or original string
+    }
+    function getFormData($form){
+        var unindexed_array = $form.serializeArray();
+        var indexed_array = {};
+
+        $.map(unindexed_array, function(n, i){
+            indexed_array[n['name']] = n['value'];
+        });
+
+        return indexed_array;
+    }
+    function readURL(input) {
+        invalidImg = 0;
+        if (input.files.length > 0) {
+            var ext = input.files[0]['name'].substring(input.files[0]['name'].lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    church_foto_base64 = e.target.result;
+                    var image = new Image();
+                    image.src = church_foto_base64;
+
+                    image.onload = function() {
+                        // access image size here                         
+                        if(minImgWidth > this.width || minImgHeight > this.height){
+                            invalidImg = 1;
+                            swal('Error', 'La imagen es demasiado corta', 'error');                            
+                            return false;
+                        }else{
+                            $('body').find('img#img_foto_preview').attr('src', church_foto_base64);
+                        }
+                    };
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    }
+</script>
+
+        <script type="text/javascript">
+            $('a[data-target="#appModal"]').click(function (e){
+                e.preventDefault();
+                var target = $(this).attr("href");
+
+                // Cargar la url y mostrar modal en caso exitoso
+                $("#appModal .modal-body").load(target, function(){
+                     $("#appModal").modal("show");
+                });
+            });
+
+            $(document).on('hidden.bs.modal', function(e){
+                $(e.target).removeData('bs.modal');
+            });
+        </script>
+    </body>
+</html>

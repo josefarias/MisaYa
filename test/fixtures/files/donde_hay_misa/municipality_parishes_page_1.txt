@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <title>Donde Hay Misa</title>
+        <meta content="Admin Espacios" name="Sistema de Documentación Espacios" />
+        <meta content="Espacios" name="Espacios" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <link rel="shortcut icon" href="http://dondehaymisa.com/assets/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="http://dondehaymisa.com/assets/images/favicon.ico" type="image/x-icon">
+
+            <!--Morris Chart CSS -->
+<link rel="stylesheet" href="http://dondehaymisa.com/assets/plugins/morris/morris.css">
+
+<link href="http://dondehaymisa.com/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="http://dondehaymisa.com/assets/css/icons.css" rel="stylesheet" type="text/css">
+<link href="http://dondehaymisa.com/assets/css/style.css" rel="stylesheet" type="text/css">
+<link href="http://dondehaymisa.com/assets/css/sweetalert.css" rel="stylesheet" type="text/css">
+<link href="http://dondehaymisa.com/assets/css/variables.css" rel="stylesheet" type="text/css">
+
+<!-- DataTables -->
+<link href="http://dondehaymisa.com/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<link href="http://dondehaymisa.com/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="http://dondehaymisa.com/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="http://dondehaymisa.com/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="http://dondehaymisa.com/assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="http://dondehaymisa.com/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://dondehaymisa.com/assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet" />
+
+    <style type="text/css">
+        .content-page > .content {
+            padding-top: 0;
+        }
+        .parroquio_block{
+            max-height: 250px; overflow: hidden; height: 250px;
+        }
+        .parroquio_image{
+            max-width: none;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .pagination-sec{
+            /*margin-bottom: 3%;*/
+        }
+        @media (max-width: 768px) {
+            #search-wrapper {
+                height: 570px;
+                margin-top:-5%;
+            }
+            .search-wrapper-large {
+                height: 1126px !important;
+                margin-top:-5%;
+            }
+            .pagination-sec{
+                /*margin-bottom: 75px;*/
+            }
+        }
+        .timepicker input.form-control[readonly], .timepicker.form-control[readonly] {
+            background-color: #fafafa !important;
+        }
+    </style>
+    </head>
+
+    <body>
+        <div class="spiner-example hide">
+            <div class="sk-spinner sk-spinner-chasing-dots">
+                <div class="sk-dot1"></div>
+                <div class="sk-dot2"></div>
+            </div>
+        </div>
+        <div id="wrapper">
+            <div class="topbar">
+                    <!-- Button mobile view to collapse sidebar menu -->
+<div class="navbar navbar-default" role="navigation" style="background-color:#85252a; color:#FFFFFF;">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="http://dondehaymisa.com">
+                <img src="http://dondehaymisa.com/assets/images/appostolica-logo.png" style="margin-top:2%; margin-left:2%; width:45px;" alt="" class="img-circle" />
+                <!--<img src="http://dondehaymisa.com/assets/images/logo2.jpg" style="margin-top:2%; margin-left:2%; width:45px;" alt="" class="img-circle" />-->
+            </a>
+            <!-- <button type="button" class="button-menu-mobile open-left waves-effect waves-light"> -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-front" aria-expanded="false" aria-controls="menu-front">
+                <i class="ion-navicon"></i>
+            </button>
+            <span class="clearfix"></span>
+        </div>
+
+        <div id="menu-front" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://dondehaymisa.com">Inicio</a></li>
+                <!--<li><a href="http://dondehaymisa.com/misal">Misal</a></li>-->
+                <li><a href="https://www.appostolica.com/">Misal</a></li>
+                <li><a href="http://dondehaymisa.com/contacto">Soporte-contacto</a></li>
+                <!--<li><a href="http://dondehaymisa.com/hacer-donativo">Hacer Donativo</a></li>-->
+                <!-- <li class="dropdown">
+                    <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
+
+                        <span class="profile-username">
+                            Menú <span class="caret"></span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0)"> Perfil</a></li>
+                        <li class="divider"></li>
+
+                        <li><a href="http://dondehaymisa.com/language/es"><img src="http://dondehaymisa.com/assets/images/flag/flag_mex.png" width="16px" /> Español</a></li>
+                        <li class="divider"></li>
+                        <li><a href="http://dondehaymisa.com/language/en"><img src="http://dondehaymisa.com/assets/images/flag/flag_us.png" width="16px" />  Ingles</a></li>
+                        <li class="divider"></li>
+                        <li><a href="http://dondehaymisa.com/admin/logout"
+                            onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();"> Terminar Sesión</a></li>
+                    </ul>
+                    <form id="logout-form" action="http://dondehaymisa.com/admin/logout" method="POST" style="display: none;">
+                            <input type="hidden" name="_token" value="dCbfZfSWpx4HL9xSR6bTWVtwtcNLD1PCRut42rkR">
+                        </form>
+                </li> -->
+                <!--<li>
+                    <a href="http://dondehaymisa.com/misal/selector" style="color:#FFFFFF;" data-target="#appModal" data-toggle="modal" data-keyboard="false"><i class="ion-search"></i></a>
+                </li>-->
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+            </div>
+
+            <!-- Begin page -->
+            <div class="content-page" style="margin-left:0;">
+                    <div class="content">
+        <div class="page-content-wrapper">
+
+            <div class="row" id="search-wrapper">
+
+                <div class="col-xs-12 col-sm-offset-1 col-md-offset-1 col-sm-10 col-md-10">
+                    <form action="http://dondehaymisa.com/busqueda" method="GET" id="frm_busqueda">
+                        <div class="row" style="margin-top:12%;">
+                            <div class="col-xs-12 col-sm-offset-1 col-md-offset-1 col-sm-5 col-md-5 front-clearfix">
+                                <!-- <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">Diócesis</label>
+                                    <div class="col-sm-8">
+                                        <select name="diocese" id="diocese" class="form-control">
+                                            <option value="">Todos</option>
+                                                                                                                                            <option value="2">Arquidiócesis de Acapulco</option>
+                                                                                                <option value="54">Arquidiócesis de Antequera - Oaxaca</option>
+                                                                                                <option value="18">Arquidiócesis de Chihuahua</option>
+                                                                                                <option value="27">Arquidiócesis de Durango</option>
+                                                                                                <option value="33">Arquidiócesis de Guadalajara</option>
+                                                                                                <option value="34">Arquidiócesis de Hermosillo</option>
+                                                                                                <option value="42">Arquidiócesis de León</option>
+                                                                                                <option value="48">Arquidiócesis de México</option>
+                                                                                                <option value="1">Arquidiócesis de Monterrey</option>
+                                                                                                <option value="50">Arquidiócesis de Morelia</option>
+                                                                                                <option value="95">Arquidiócesis de Oviedo</option>
+                                                                                                <option value="59">Arquidiócesis de Puebla</option>
+                                                                                                <option value="78">Arquidiócesis de Tijuana</option>
+                                                                                                <option value="79">Arquidiócesis de Tlalnepantla</option>
+                                                                                                <option value="85">Arquidiócesis de Tulancingo</option>
+                                                                                                <option value="88">Arquidiócesis de Tuxtla Gutierrez</option>
+                                                                                                <option value="91">Arquidiócesis de Xalapa</option>
+                                                                                                <option value="92">Arquidiócesis de Yucatán</option>
+                                                                                                <option value="3">Diócesis de Aguascalientes</option>
+                                                                                                <option value="4">Diócesis de Apatzingán</option>
+                                                                                                <option value="5">Diócesis de Atlacomulco</option>
+                                                                                                <option value="6">Diócesis de Autlán</option>
+                                                                                                <option value="7">Diócesis de Campeche</option>
+                                                                                                <option value="17">Diócesis de Celaya</option>
+                                                                                                <option value="19">Diócesis de Chilpancingo-Chilapa</option>
+                                                                                                <option value="9">Diócesis de Ciudad Altamirano</option>
+                                                                                                <option value="10">Diócesis de Ciudad Guzmán</option>
+                                                                                                <option value="11">Diócesis de Ciudad Juárez</option>
+                                                                                                <option value="12">Diócesis de Ciudad Lázaro Cárdenas</option>
+                                                                                                <option value="14">Diócesis de Ciudad Obregón</option>
+                                                                                                <option value="15">Diócesis de Ciudad Valles</option>
+                                                                                                <option value="16">Diócesis de Ciudad Victoria</option>
+                                                                                                <option value="20">Diócesis de Coatzacoalcos</option>
+                                                                                                <option value="21">Diócesis de Colima</option>
+                                                                                                <option value="22">Diócesis de Córdoba</option>
+                                                                                                <option value="23">Diócesis de Cuauhtémoc-Madera</option>
+                                                                                                <option value="24">Diócesis de Cuautitlán</option>
+                                                                                                <option value="25">Diócesis de Cuernavaca</option>
+                                                                                                <option value="26">Diócesis de Culiacán</option>
+                                                                                                <option value="28">Diócesis de Ecatepec</option>
+                                                                                                <option value="31">Diócesis de Ensenada</option>
+                                                                                                <option value="32">Diócesis de Gomez Palacio</option>
+                                                                                                <option value="35">Diócesis de Huajuapan</option>
+                                                                                                <option value="36">Diócesis de Huajuapan de León</option>
+                                                                                                <option value="38">Diócesis de Huejutla</option>
+                                                                                                <option value="39">Diócesis de Irapuato</option>
+                                                                                                <option value="40">Diócesis de Izcalli</option>
+                                                                                                <option value="41">Diócesis de La Paz</option>
+                                                                                                <option value="43">Diócesis de Linares</option>
+                                                                                                <option value="44">Diócesis de Matamoros</option>
+                                                                                                <option value="45">Diócesis de Matehuala</option>
+                                                                                                <option value="46">Diócesis de Mazatlán</option>
+                                                                                                <option value="47">Diócesis de Mexicali</option>
+                                                                                                <option value="13">Diócesis de Nezahualcóyotl</option>
+                                                                                                <option value="51">Diócesis de Nogales</option>
+                                                                                                <option value="52">Diócesis de Nuevo Casas Grandes</option>
+                                                                                                <option value="53">Diócesis de Nuevo Laredo</option>
+                                                                                                <option value="55">Diócesis de Orizaba</option>
+                                                                                                <option value="56">Diócesis de Papantla</option>
+                                                                                                <option value="57">Diócesis de Parral</option>
+                                                                                                <option value="58">Diócesis de Piedras Negras</option>
+                                                                                                <option value="60">Diócesis de Puerto Escondido</option>
+                                                                                                <option value="61">Diócesis de Querétaro</option>
+                                                                                                <option value="62">Diócesis de Saltillo</option>
+                                                                                                <option value="63">Diócesis de San Andrés Tuxtla</option>
+                                                                                                <option value="64">Diócesis de San Cristóbal de las Casas</option>
+                                                                                                <option value="65">Diócesis de San Juan de los Lagos</option>
+                                                                                                <option value="66">Diócesis de San Luis Potosí</option>
+                                                                                                <option value="67">Diócesis de Tabasco</option>
+                                                                                                <option value="68">Diócesis de Tacámbaro</option>
+                                                                                                <option value="69">Diócesis de Tampico</option>
+                                                                                                <option value="70">Diócesis de Tapachula</option>
+                                                                                                <option value="71">Diócesis de Tarahumara</option>
+                                                                                                <option value="72">Diócesis de Tehuacán</option>
+                                                                                                <option value="73">Diócesis de Tehuantepec</option>
+                                                                                                <option value="74">Diócesis de Tenancingo</option>
+                                                                                                <option value="75">Diócesis de Teotihuacán</option>
+                                                                                                <option value="76">Diócesis de Tepic</option>
+                                                                                                <option value="77">Diócesis de Texcoco</option>
+                                                                                                <option value="80">Diócesis de Tlapa</option>
+                                                                                                <option value="81">Diócesis de Tlaxcala</option>
+                                                                                                <option value="82">Diócesis de Toluca</option>
+                                                                                                <option value="83">Diócesis de Torreón</option>
+                                                                                                <option value="84">Diócesis de Tula</option>
+                                                                                                <option value="86">Diócesis de Tuxpan</option>
+                                                                                                <option value="87">Diócesis de Tuxtepec</option>
+                                                                                                <option value="89">Diócesis de Valle de Chalco</option>
+                                                                                                <option value="90">Diócesis de Veracruz</option>
+                                                                                                <option value="93">Diócesis de Zacatecas</option>
+                                                                                                <option value="94">Diócesis de Zamora</option>
+                                                                                                <option value="8">Prelatura de Cancún - Chetumal</option>
+                                                                                                <option value="29">Prelatura de El Nayar</option>
+                                                                                                <option value="30">Prelatura de El Salto</option>
+                                                                                                <option value="37">Prelatura de Huautla</option>
+                                                                                                <option value="49">Prelatura de Mixes</option>
+                                                                                                                                    </select>
+                                    </div>
+                                </div>
+                                <br /><br />           -->
+                                <div class="form-group">
+                                    <label for="nombre" class="col-sm-4 control-label">Parroquia:</label>
+
+                                    <div class="col-sm-8">
+                                        <input type="text" id="nombre" name="nombre" class="form-control" value="" />
+                                    </div>
+                                </div>
+                                <br /><br />
+
+                                <div class="form-group">
+                                    <label for="estado" class="col-sm-4 control-label">Estado:</label>
+
+                                    <div class="col-sm-8">
+                                        <select id="estado" name="estado" class="form-control selectpicker" placeholder="Seleccione el estado de la parroquia" cadena="- Debe seleccionar el estado de la parroquia" onchange="traeMunicipios();">
+                                            <option value="">(SELECCIONAR)</option>
+                                                                                            <option value="1" >Aguascalientes</option>
+                                                                                            <option value="42" >Asturias</option>
+                                                                                            <option value="2" >Baja California</option>
+                                                                                            <option value="3" >Baja California Sur</option>
+                                                                                            <option value="4" >Campeche</option>
+                                                                                            <option value="9" >CDMX</option>
+                                                                                            <option value="7" >Chiapas</option>
+                                                                                            <option value="8" >Chihuahua</option>
+                                                                                            <option value="5" >Coahuila</option>
+                                                                                            <option value="6" >Colima</option>
+                                                                                            <option value="10" >Durango</option>
+                                                                                            <option value="11" >Guanajuato</option>
+                                                                                            <option value="12" >Guerrero</option>
+                                                                                            <option value="13" >Hidalgo</option>
+                                                                                            <option value="14" >Jalisco</option>
+                                                                                            <option value="15" >México</option>
+                                                                                            <option value="16" >Michoacán</option>
+                                                                                            <option value="17" >Morelos</option>
+                                                                                            <option value="18" >Nayarit</option>
+                                                                                            <option value="19" selected>Nuevo León</option>
+                                                                                            <option value="20" >Oaxaca</option>
+                                                                                            <option value="21" >Puebla</option>
+                                                                                            <option value="22" >Querétaro</option>
+                                                                                            <option value="23" >Quintana Roo</option>
+                                                                                            <option value="24" >San Luis Potosí</option>
+                                                                                            <option value="25" >Sinaloa</option>
+                                                                                            <option value="26" >Sonora</option>
+                                                                                            <option value="27" >Tabasco</option>
+                                                                                            <option value="28" >Tamaulipas</option>
+                                                                                            <option value="29" >Tlaxcala</option>
+                                                                                            <option value="30" >Veracruz</option>
+                                                                                            <option value="31" >Yucatán</option>
+                                                                                            <option value="32" >Zacatecas</option>
+                                                                                    </select>
+                                    </div>
+                                </div>
+
+                                <br /><br />
+
+                                <div class="form-group">
+                                    <label for="municipio_id" class="col-sm-4 control-label">Municipio:</label>
+
+                                    <div class="col-sm-8">
+                                        <select id="municipio_id" name="municipio_id" class="form-control selectpicker" placeholder="Seleccione el municipio de la parroquia" cadena="- Debe seleccionar el municipio de la parroquia">
+                                            <option value="">(SELECCIONAR)</option>
+                                                                                            <option value="960" >Abasolo</option>
+                                                                                            <option value="963" >Agualeguas</option>
+                                                                                            <option value="986" >Allende</option>
+                                                                                            <option value="949" >Anáhuac</option>
+                                                                                            <option value="973" >Apodaca</option>
+                                                                                            <option value="996" >Aramberri</option>
+                                                                                            <option value="952" >Bustamante</option>
+                                                                                            <option value="988" >Cadereyta Jiménez</option>
+                                                                                            <option value="972" >Carmen</option>
+                                                                                            <option value="965" >Cerralvo</option>
+                                                                                            <option value="982" >China</option>
+                                                                                            <option value="958" >Ciénega de Flores</option>
+                                                                                            <option value="995" >Dr. Arroyo</option>
+                                                                                            <option value="980" >Dr. Coss</option>
+                                                                                            <option value="976" >Dr. González</option>
+                                                                                            <option value="993" >Galeana</option>
+                                                                                            <option value="967" >García</option>
+                                                                                            <option value="981" >Gral. Bravo</option>
+                                                                                            <option value="968" >Gral. Escobedo</option>
+                                                                                            <option value="987" >Gral. Terán</option>
+                                                                                            <option value="964" >Gral. Treviño</option>
+                                                                                            <option value="997" >Gral. Zaragoza</option>
+                                                                                            <option value="962" >Gral. Zuazua</option>
+                                                                                            <option value="983" >Guadalupe</option>
+                                                                                            <option value="959" >Hidalgo</option>
+                                                                                            <option value="961" >Higueras</option>
+                                                                                            <option value="994" >Hualahuises</option>
+                                                                                            <option value="992" >Iturbide</option>
+                                                                                            <option value="984" >Juárez</option>
+                                                                                            <option value="950" >Lampazos de Naranjo</option>
+                                                                                            <option value="991" >Linares</option>
+                                                                                            <option value="979" >Los Aldamas</option>
+                                                                                            <option value="978" >Los Herreras</option>
+                                                                                            <option value="977" >Los Ramones</option>
+                                                                                            <option value="975" >Marín</option>
+                                                                                            <option value="966" >Melchor Ocampo</option>
+                                                                                            <option value="998" >Mier y Noriega</option>
+                                                                                            <option value="951" >Mina</option>
+                                                                                            <option value="989" >Montemorelos</option>
+                                                                                            <option value="948" >Monterrey</option>
+                                                                                            <option value="956" >Parás</option>
+                                                                                            <option value="974" >Pesquería</option>
+                                                                                            <option value="990" >Rayones</option>
+                                                                                            <option value="953" >Sabinas Hidalgo</option>
+                                                                                            <option value="957" >Salinas Victoria</option>
+                                                                                            <option value="971" >San Nicolás de los Garza</option>
+                                                                                            <option value="970" selected>San Pedro Garza García</option>
+                                                                                            <option value="969" >Santa Catarina</option>
+                                                                                            <option value="985" >Santiago</option>
+                                                                                            <option value="955" >Vallecillo</option>
+                                                                                            <option value="954" >Villaldama</option>
+                                                                                    </select>
+                                    </div>
+                                </div>
+                                <br><br><br>
+                                <div class="form-group btnAct">
+                                    <div class="col-xs-12 col-sm-6 pull-right" style="margin-bottom: 15px;">
+                                        <input type="submit" id="btnBuscar" class="btn btn-danger2 form-control" value="Búsqueda" />
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 pull-right" style="margin-bottom: 15px;">
+                                        <a href="http://dondehaymisa.com/busqueda#parishResults" class="btn btn-danger2 form-control">Claro</a>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 pull-left" style="margin-bottom: 15px;">
+                                        <button class="btn btn-danger2 form-control" id="btnAdvSearch">Búsqueda Avanzada</button>
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <div class="col-sm-offset-6 col-sm-3">
+                                        <input type="submit" id="btnBuscar" class="btn btn-danger2 form-control" value="Buscar" />
+                                    </div>
+                                    <div class="col-sm-offset-6 col-sm-3">
+                                        <input type="submit" id="btnBuscar" class="btn btn-danger2 form-control" value="Buscar" />
+                                    </div>
+                                </div>       -->
+                            </div>
+
+                            <div class="col-sm-5 col-md-5  front-clearfix" id="adv-search-sec" style="display: none">
+                                <div class="form-group">
+                                    <label for="tipo" class="col-sm-4 control-label">Tipo de misa:</label>
+
+                                    <div class="col-sm-8">
+                                        <select id="tipo" name="tipo" class="form-control selectpicker" placeholder="Seleccione el tipo de la parroquia" cadena="- Debe seleccionar el tipo de la parroquia">
+                                            <option value="">TODOS</option>
+                                                                                            <option value="carismatica" >Carismática</option>
+                                                                                            <option value="con-ninios" >Con niños</option>
+                                                                                            <option value="diaria" >Diaria</option>
+                                                                                            <option value="juvenil" >Juvenil</option>
+                                                                                            <option value="precepto-dominical" >Precepto dominical</option>
+                                                                                            <option value="uncion-enfermos" >Unción de Enfermos</option>
+                                                                                            <option value="no-oyentes" >Para no oyentes</option>
+                                                                                            <option value="san-nicolas-bari" >San Nicolás de Bari</option>
+                                                                                            <option value="latin" >En latín</option>
+                                                                                    </select>
+                                    </div>
+                                </div>
+
+                                <br /><br />
+
+                                <div class="form-group">
+                                    <label for="dia" class="col-sm-4 control-label">Día Horario:</label>
+
+                                    <div class="col-sm-8">
+                                        <select id="dia" name="dia" class="form-control selectpicker" placeholder="Seleccione el dia de la parroquia" cadena="- Debe seleccionar el dia de la parroquia">
+                                            <option value="">TODOS</option>
+                                                                                            <option value="1" >Lunes</option>
+                                                                                            <option value="2" >Martes</option>
+                                                                                            <option value="3" >Miércoles</option>
+                                                                                            <option value="4" >Jueves</option>
+                                                                                            <option value="5" >Viernes</option>
+                                                                                            <option value="6" >Sábado</option>
+                                                                                            <option value="7" >Domingo</option>
+                                                                                    </select>
+                                    </div>
+                                </div>
+
+                                <br /><br />
+
+                                <div class="form-group">
+                                    <label for="estado" class="col-sm-4 control-label">Horario:</label>
+
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <input id="hora" type="text" class="form-control timepicker" readonly="readonly" name="hora" value="" />
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br /><br />
+
+                                <div class="form-group">
+                                    <label for="estado" class="col-sm-4 control-label">¿Qué buscas?</label>
+
+                                    <div class="col-sm-8">
+                                        <select id="tipo_servicio" name="tipo_servicio" class="form-control selectpicker" placeholder="Seleccione el tipo de servicio" cadena="- Debe seleccionar el tipo de servicio de la parroquia">
+                                            <option value="">TODOS</option>
+                                                                                            <option value="misa" >Misas</option>
+                                                                                            <option value="confesion" >Confesiones</option>
+                                                                                    </select>
+                                    </div>
+                                </div>
+
+                                <br /><br /><br />
+
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-sm-6" style="margin-bottom: 15px;">
+                                        <a href="http://dondehaymisa.com/busqueda#parishResults" class="btn btn-danger2 form-control">Claro</a>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12">
+                                        <input type="submit" id="btnBuscar" class="btn btn-danger2 form-control" value="Buscar" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="formType" id="formType" value="basic" />
+                    </form>
+                </div>
+            </div>
+                                    <div class="row" style="margin-top: 3%;height: 260px;">
+                <div class="col-xs-12 col-md-offset-1 col-md-10">
+                    <div class="row" style="margin-bottom: 2%;">
+                        <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-10 text-center">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div style="max-width: 400px; margin: 0 auto;">
+                                    <div class="col-xs-12" style="margin-bottom: 25px;">
+                                        <img src="http://dondehaymisa.com/assets/images/google-play-badge1.png" style="height: 84px;">
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div style=" max-width: 400px; margin: 0 auto;">
+                                    <div class="col-lg-12">
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="col-md-6 col-sm-6 col-xs-6 pull-right" style="height: 110px; " >
+                                                <a href="https://play.google.com/store/apps/details?id=com.arquinet.misal" target="_blank"><img src="http://dondehaymisa.com/assets/images/misal.png" style="max-height: 95px; border-radius: 10px;"></a>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-6 pull-left" style="height: 110px;" >
+                                                <a href="https://play.google.com/store/apps/details?id=com.dondehaymisa.dhm" target="_blank"><img src="http://dondehaymisa.com/assets/images/logo2.jpg" style="max-height: 95px; border-radius: 10px;"/></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div style="max-width: 400px; margin: 0 auto;">
+                                    <div class="col-xs-12" style="margin-bottom: 25px;">
+                                        <img src="http://dondehaymisa.com/assets/images/applestore.png" style="height: 84px;">
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div style=" max-width: 400px; margin: 0 auto;">
+                                    <div class="col-lg-12">
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="col-md-6 col-sm-6 col-xs-6 pull-right" style="height: 110px; " >
+                                                <a href="https://itunes.apple.com/us/app/misal-arquidi%C3%B3cesis-de-monte/id924752470?ls=1&mt=8" target="_blank"><img src="http://dondehaymisa.com/assets/images/misal.png" style="max-height: 95px; border-radius: 10px;"></a>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-6 pull-left" style="height: 110px;" >
+                                                <a href="https://itunes.apple.com/us/app/dhm-d%C3%B3nde-hay-misa/id862698563?ls=1&mt=8" target="_blank"><img src="http://dondehaymisa.com/assets/images/logo2.jpg" style="max-height: 95px; border-radius: 10px;"/></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div id="parishResults" style="clear: both;"></div>
+            </div>
+                        <div class="row">
+                <div class="col-xs-12 col-md-offset-1 col-md-10" style="padding-top: 30px;">
+                    <div class="row" style="margin-bottom: 4%;">
+                        <div class="col-xs-12 col-sm-offset-1 col-md-offset-1 col-sm-10 col-md-10 text-center">
+                            <h2 class="titulo">Resultados de búsqueda</h2>
+                            <hr style="width:15%; border:2px #F27F00 solid; margin-top:0;" />
+                        </div>
+                    </div>
+
+                                                                                                <div class="row" style="margin-bottom:3%;">
+                                <div class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-3 col-md-3 text-center parroquio_block">
+                                    <a href="http://dondehaymisa.com/parroquia/31"><img src="https://www.dondehaymisa.com/parishes/photos/original_05112021_122706_37684fb49e57033acafe4c9000bb4629.jpeg" border="0" class="img-responsive parroquio_image" /></a>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <a href="http://dondehaymisa.com/parroquia/31"><!-- <h3 style="color:#F27F00;"> Inmaculate Mary (English Speaking Parish)</h3> -->
+                                    <h3 style="color:#F27F00;">Parroquia Inmaculate Mary (English Speaking Parish)</h3>
+                                    </a>
+
+                                    <p class="search-results">
+                                        <strong class="hide">Diosesis:</strong> <em>Arquidiócesis de Monterrey</em>
+                                    </p>
+
+                                    <p class="search-results">
+                                        <strong>Dirección:</strong> <em>Av. Vasconcelos y Av. San Pedro, Col. Del Valle, C.P. 66250, San Pedro Garza García, Nuevo León, México</em>
+                                    </p>
+
+                                    <p class="search-results">
+                                        <strong>Teléfono:</strong> <a href="tel:++528111582150"<em>+528111582150</em></a>
+                                    </p>
+
+                                                                        <p class="search-results">
+                                                                                    <strong>Fiesta Patronal:</strong> <em>Mayo 13</em>
+                                    </p>
+                                                                                                                                                <p class="search-results">
+                                        <strong>Misas Hoy:</strong> <em>12:00 PM</em>
+                                    </p>
+                                                                                                                                                <div class="row">
+                                        
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <div class="row" style="margin-bottom:3%;">
+                                <div class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-3 col-md-3 text-center parroquio_block">
+                                    <a href="http://dondehaymisa.com/parroquia/42"><img src="https://www.dondehaymisa.com/parishes/photos/original_08112021_094744_d241e264388d5658decf5235e2ad0bcd.png" border="0" class="img-responsive parroquio_image" /></a>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <a href="http://dondehaymisa.com/parroquia/42"><!-- <h3 style="color:#F27F00;"> Mater Admirabilis</h3> -->
+                                    <h3 style="color:#F27F00;">Parroquia Mater Admirabilis</h3>
+                                    </a>
+
+                                    <p class="search-results">
+                                        <strong class="hide">Diosesis:</strong> <em>Arquidiócesis de Monterrey</em>
+                                    </p>
+
+                                    <p class="search-results">
+                                        <strong>Dirección:</strong> <em>Av. Vasconcelos No. 264 Pte., Col. Del Valle, C.P. 66220, San Pedro Garza García, Nuevo León, México</em>
+                                    </p>
+
+                                    <p class="search-results">
+                                        <strong>Teléfono:</strong> <a href="tel:++528183386807"<em>+528183386807</em></a>
+                                    </p>
+
+                                                                        <p class="search-results">
+                                                                                    <strong>Fiesta Patronal:</strong> <em>Octubure 20</em>
+                                    </p>
+                                                                                                                                                <p class="search-results">
+                                        <strong>Misas Hoy:</strong> <em>09:00 AM, 10:30 AM, 11:30 AM, 01:00 PM, 06:00 PM, 07:00 PM, 08:00 PM</em>
+                                    </p>
+                                                                                                                                                <p class="search-results">
+                                        <strong>Confesiones Hoy:</strong> <em>11:30 AM a 12:30 PM, 01:00 PM a 01:45 PM, 07:00 PM a 07:45 PM</em>
+                                    </p>
+                                                                        <div class="row">
+                                        
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <div class="row" style="margin-bottom:3%;">
+                                <div class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-3 col-md-3 text-center parroquio_block">
+                                    <a href="http://dondehaymisa.com/parroquia/47"><img src="https://www.dondehaymisa.com/parishes/photos/original_22042019_122552_73dfd4dbf10a4e199db195252a30b73b.jpeg" border="0" class="img-responsive parroquio_image" /></a>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <a href="http://dondehaymisa.com/parroquia/47"><!-- <h3 style="color:#F27F00;"> Nuestra Señora de Fátima</h3> -->
+                                    <h3 style="color:#F27F00;">Parroquia-Santuario Nuestra Señora de Fátima</h3>
+                                    </a>
+
+                                    <p class="search-results">
+                                        <strong class="hide">Diosesis:</strong> <em>Arquidiócesis de Monterrey</em>
+                                    </p>
+
+                                    <p class="search-results">
+                                        <strong>Dirección:</strong> <em>Río Tiber S/N entre Río Tigris y Eufrates, Col. Del Valle, C.P. 66220, San Pedro Garza García, Nuevo León, México</em>
+                                    </p>
+
+                                    <p class="search-results">
+                                        <strong>Teléfono:</strong> <a href="tel:++528111582150,11582151"<em>+528111582150,11582151</em></a>
+                                    </p>
+
+                                                                        <p class="search-results">
+                                                                                    <strong>Fiesta Patronal:</strong> <em>Mayo 13</em>
+                                    </p>
+                                                                                                                                                <p class="search-results">
+                                        <strong>Misas Hoy:</strong> <em>07:30 AM, 10:00 AM, 11:00 AM, 12:00 PM, 01:15 PM, 06:00 PM, 07:30 PM, 09:00 PM</em>
+                                    </p>
+                                                                                                                                                <p class="search-results">
+                                        <strong>Confesiones Hoy:</strong> <em>07:00 AM a 02:00 PM, 06:00 PM a 10:00 PM</em>
+                                    </p>
+                                                                        <div class="row">
+                                        
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <div class="row" style="margin-bottom:3%;">
+                                <div class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-3 col-md-3 text-center parroquio_block">
+                                    <a href="http://dondehaymisa.com/parroquia/50"><img src="https://www.dondehaymisa.com/parishes/photos/original_08112021_094741_d53f0851b26691fcdf928663afd2bd32.png" border="0" class="img-responsive parroquio_image" /></a>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <a href="http://dondehaymisa.com/parroquia/50"><!-- <h3 style="color:#F27F00;"> Nuestra Señora de Guadalupe</h3> -->
+                                    <h3 style="color:#F27F00;">Parroquia Nuestra Señora de Guadalupe</h3>
+                                    </a>
+
+                                    <p class="search-results">
+                                        <strong class="hide">Diosesis:</strong> <em>Arquidiócesis de Monterrey</em>
+                                    </p>
+
+                                    <p class="search-results">
+                                        <strong>Dirección:</strong> <em>Libertad No. 109 Ote., Col. Centro, C.P. 66230, San Pedro Garza García, Nuevo León, México</em>
+                                    </p>
+
+                                    <p class="search-results">
+                                        <strong>Teléfono:</strong> <a href="tel:++528111582880,83380941,83381831"<em>+528111582880,83380941,83381831</em></a>
+                                    </p>
+
+                                                                        <p class="search-results">
+                                                                                    <strong>Fiesta Patronal:</strong> <em>Diciembre 12</em>
+                                    </p>
+                                                                                                                                                <p class="search-results">
+                                        <strong>Misas Hoy:</strong> <em>06:30 AM, 09:00 AM, 11:00 AM, 12:00 PM, 06:30 PM, 07:30 PM, 08:30 PM</em>
+                                    </p>
+                                                                                                                                                <p class="search-results">
+                                        <strong>Confesiones Hoy:</strong> <em>11:00 AM a 12:00 PM, 12:00 PM a 12:45 PM, 06:30 PM a 07:27 PM, 07:30 PM a 08:30 PM</em>
+                                    </p>
+                                                                        <div class="row">
+                                        
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <div class="row" style="margin-bottom:3%;">
+                                <div class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-3 col-md-3 text-center parroquio_block">
+                                    <a href="http://dondehaymisa.com/parroquia/83"><img src="https://www.dondehaymisa.com/parishes/photos/original_08112021_094716_690265d0ba3f2c7be34a89fec96a63f6.png" border="0" class="img-responsive parroquio_image" /></a>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <a href="http://dondehaymisa.com/parroquia/83"><!-- <h3 style="color:#F27F00;"> Nuestra Señora Reina de los Ángeles</h3> -->
+                                    <h3 style="color:#F27F00;">Parroquia Nuestra Señora Reina de los Ángeles</h3>
+                                    </a>
+
+                                    <p class="search-results">
+                                        <strong class="hide">Diosesis:</strong> <em>Arquidiócesis de Monterrey</em>
+                                    </p>
+
+                                    <p class="search-results">
+                                        <strong>Dirección:</strong> <em>Roberto Garza Sada  No. 300, Col. Valle San Ángel, C.P. 66290, San Pedro Garza García, Nuevo León, México</em>
+                                    </p>
+
+                                    <p class="search-results">
+                                        <strong>Teléfono:</strong> <a href="tel:++528111582591,11582594"<em>+528111582591,11582594</em></a>
+                                    </p>
+
+                                                                        <p class="search-results">
+                                                                                    <strong>Fiesta Patronal:</strong> <em>Agosto 02</em>
+                                    </p>
+                                                                                                                                                <p class="search-results">
+                                        <strong>Misas Hoy:</strong> <em>08:30 AM, 10:00 AM, 11:15 AM, 12:30 PM, 01:45 PM, 05:00 PM, 06:30 PM, 08:00 PM</em>
+                                    </p>
+                                                                                                                                                <p class="search-results">
+                                        <strong>Confesiones Hoy:</strong> <em>10:00 AM a 11:00 AM, 11:15 AM a 12:00 PM, 12:30 PM a 01:30 PM, 01:45 PM a 02:30 PM, 05:00 PM a 06:00 PM, 06:30 PM a 07:30 PM, 08:00 PM a 09:00 PM</em>
+                                    </p>
+                                                                        <div class="row">
+                                        
+                                                                            </div>
+                                </div>
+                            </div>
+                        
+                        <div class="row pagination-sec">
+                            <div class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-10 col-md-10 text-center">
+                                <ul class="pagination">
+        
+                    <li class="disabled"><span>&laquo;</span></li>
+        
+        
+                    
+            
+            
+                                                                        <li class="active"><span>1</span></li>
+                                                                                <li><a href="http://dondehaymisa.com/busqueda?estado=19&amp;municipio_id=970&amp;formType=basic&amp;page=2#parishResults">2</a></li>
+                                                                                <li><a href="http://dondehaymisa.com/busqueda?estado=19&amp;municipio_id=970&amp;formType=basic&amp;page=3#parishResults">3</a></li>
+                                                                                <li><a href="http://dondehaymisa.com/busqueda?estado=19&amp;municipio_id=970&amp;formType=basic&amp;page=4#parishResults">4</a></li>
+                                                                                <li><a href="http://dondehaymisa.com/busqueda?estado=19&amp;municipio_id=970&amp;formType=basic&amp;page=5#parishResults">5</a></li>
+                                                        
+        
+                    <li><a href="http://dondehaymisa.com/busqueda?estado=19&amp;municipio_id=970&amp;formType=basic&amp;page=2#parishResults" rel="next">&raquo;</a></li>
+            </ul>
+
+                            </div>
+                        </div>
+                                    </div>
+            </div>
+        </div>
+    </div>
+            </div>
+            <!-- END wrapper -->
+        </div>
+
+        <div id="footer-front" class="footer">
+            <p>
+                Dónde Hay Misa es una página y una aplicación de la Arquidiócesis de Monterrey
+                <br />
+                <a href="http://arquidiocesismty.org" target="_blank">arquidiocesismty.org</a> - <a href="mailto:dhm@arquidiocesismty.org">dhm@arquidiocesismty.org</a>
+            </p>
+        </div>
+
+        <div id="appModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header"></div>
+
+                    <div class="modal-body">
+                        <img src="http://dondehaymisa.com/assets/images/loading.gif" style="width:80%;" />
+                    </div>
+
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function show_loader(flag)
+            {                    
+                if(flag)
+                {
+                    $(".spiner-example").removeClass('hide');
+                }
+                else
+                {
+                    $(".spiner-example").addClass('hide');
+                }
+            }
+        </script>
+            <!-- Scripts de inicializacion  -->
+        <script src="http://dondehaymisa.com/assets/js/jquery.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/bootstrap.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/modernizr.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/detect.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/fastclick.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/jquery.slimscroll.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/jquery.blockUI.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/waves.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/wow.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/jquery.nicescroll.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/jquery.scrollTo.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/js/sweetalert.min.js"></script>
+        
+
+        <!-- Datatables-->
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/dataTables.bootstrap.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/buttons.bootstrap.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/jszip.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/pdfmake.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/vfs_fonts.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/buttons.html5.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/buttons.print.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/dataTables.keyTable.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/dataTables.responsive.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/responsive.bootstrap.min.js"></script>
+        <script src="http://dondehaymisa.com/assets/plugins/datatables/dataTables.scroller.min.js"></script>
+        
+        <!-- Custom filesystem-->
+        <script src="http://dondehaymisa.com/assets/plugins/bootstrap-filestyle/js/bootstrap-filestyle.min.js" type="text/javascript"></script>
+
+        <script src="http://dondehaymisa.com/assets/js/app.js"></script>    <script src="http://dondehaymisa.com/assets/plugins/timepicker/bootstrap-timepicker.js"></script>
+
+            <script type="text/javascript">
+        $('body').on('submit', '#frm_busqueda', function(e) {
+            e.preventDefault();
+            window.location.href = $('#frm_busqueda').attr('action') + "?" + $('#frm_busqueda').serialize() + "#parishResults";
+        })
+        $('body').on('click','#btnAdvSearch',function(){
+            event.preventDefault();
+            showAdvancedSearch();
+        });
+        // Function to handle the click of advanced search button
+        function showAdvancedSearch() {
+            $('#search-wrapper').addClass('search-wrapper-large');
+            $('.btnAct').hide();
+            $('#adv-search-sec').show();
+            $('#formType').val('advanced');
+        }
+        
+        $('.timepicker').timepicker({
+            minuteStep: 1,
+            defaultTime: '',
+            showInputs: false,
+            showMeridian: true,
+        });
+
+        function traeMunicipios()
+        {
+            var estado = $('#estado').val();
+            var url = "http://dondehaymisa.com/listaMunicipiosSearch" + '/' + estado;
+            var html = '<option value="">(SELECCIONAR)</option>';
+
+            $.get(url, function(response){
+                $.each(response.municipios, function(key, el){
+                    html += '<option value="' + el.id + '">' + el.nombre + '</option>';
+                });
+
+                $("#municipio_id").html(html);
+                //$('#municipio_id').selectpicker('refresh');
+            }, 'json');
+        }
+    </script>
+
+        <script type="text/javascript">
+            $('a[data-target="#appModal"]').click(function (e){
+                e.preventDefault();
+                var target = $(this).attr("href");
+
+                // Cargar la url y mostrar modal en caso exitoso
+                $("#appModal .modal-body").load(target, function(){
+                     $("#appModal").modal("show");
+                });
+            });
+
+            $(document).on('hidden.bs.modal', function(e){
+                $(e.target).removeData('bs.modal');
+            });
+        </script>
+    </body>
+</html>
