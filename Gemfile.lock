@@ -130,6 +130,8 @@ GEM
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
+    nokogiri (1.12.5-x64-mingw32)
+      racc (~> 1.4)
     parallel (1.21.0)
     parser (3.0.3.2)
       ast (~> 2.4.1)
@@ -221,11 +223,15 @@ GEM
       rails (>= 6.0.0)
     tailwindcss-rails (2.0.0)
       railties (>= 6.0.0)
+    tailwindcss-rails (2.0.0-x64-mingw32)
+      railties (>= 6.0.0)
     thor (1.1.0)
     turbo-rails (0.9.0)
       rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2021.5)
+      tzinfo (>= 1.0.0)
     unicode-display_width (2.1.0)
     web-console (4.2.0)
       actionview (>= 6.0.0)
@@ -252,6 +258,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   bootsnap (>= 1.4.4)
@@ -283,7 +290,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 3.0.2p107
+   ruby 3.0.3p157
 
 BUNDLED WITH
-   2.2.31
+   2.2.33
