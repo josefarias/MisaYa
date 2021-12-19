@@ -64,11 +64,13 @@ class DondeHayMisaScraperTest < ActiveSupport::TestCase
     uri = URI(url)
     html = file_fixture("donde_hay_misa/parish_42.txt").read
     name = "Parroquia Mater Admirabilis"
+    address = "Av. Vasconcelos No. 264 Pte., Col. Del Valle, C.P. 66220, San Pedro Garza García, Nuevo León, México"
 
     Net::HTTP.expects(:get).with(uri).returns(html)
     parish_data = scraper.send(:scrape_parish_data, url: url)
 
     assert_equal name, parish_data[:name]
+    assert_equal address, parish_data[:address]
     assert_equal MASSES, parish_data[:masses]
   end
 

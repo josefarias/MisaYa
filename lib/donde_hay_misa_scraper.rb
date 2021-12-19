@@ -27,6 +27,7 @@ class DondeHayMisaScraper
     "Domingo" => :sunday
   }.freeze
   PAGINATION_ELEMENTS_CSS = ".pagination>li"
+  PARISH_ADDRESS_XPATH = "//p[@class='search-results']/strong[contains(., 'Dirección')]/following-sibling::em"
   PARISH_NAME_XPATH = "//div[@class='col-xs-12 col-md-offset-1 col-md-5 col-sm-12']/h2"
   PARISH_MASSES_XPATH = "//div[@id='collapseMisas']/div/table[@class='table']/tbody/tr"
   PARISH_URLS_XPATH = "//div[@class='col-xs-6 col-sm-6 col-md-6']/a/@href"
@@ -57,8 +58,10 @@ class DondeHayMisaScraper
     response = Net::HTTP.get(uri)
     doc = Nokogiri::HTML(response)
     name_element = doc.xpath(PARISH_NAME_XPATH).first
+    address_element = doc.xpath(PARISH_ADDRESS_XPATH).first
     mass_elements = doc.xpath(PARISH_MASSES_XPATH)
     name = name_element.content.strip
+    address = address_element.content.strip
     masses = mass_elements.map(&:content).map do |mass|
       mass_data = mass.strip.split("\n").map(&:strip)
 
@@ -69,7 +72,7 @@ class DondeHayMisaScraper
       }
     end
 
-    {name: name, masses: masses}
+    {name: name, address: address, masses: masses}
   end
 
   def scrape_parish_urls(number_of_pages:)
