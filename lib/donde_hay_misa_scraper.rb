@@ -26,13 +26,7 @@ class DondeHayMisaScraper
     "Sábado" => :saturday,
     "Domingo" => :sunday
   }.freeze
-  PAGINATION_ELEMENTS_CSS = ".pagination>li"
-  PARISH_ADDRESS_XPATH = "//p[@class='search-results']/strong[contains(., 'Dirección')]/following-sibling::em"
-  PARISH_NAME_XPATH = "//div[@class='col-xs-12 col-md-offset-1 col-md-5 col-sm-12']/h2"
-  PARISH_MASSES_XPATH = "//div[@id='collapseMisas']/div/table[@class='table']/tbody/tr"
-  PARISH_URLS_XPATH = "//div[@class='col-xs-6 col-sm-6 col-md-6']/a/@href"
-  STATE_ELEMENTS_CSS = "select#estado>option"
-  TYPES = {
+  KINDS = {
     "Carismática" => :charismatic,
     "Diaria" => :daily,
     "Precepto dominical" => :dominical,
@@ -40,6 +34,12 @@ class DondeHayMisaScraper
     "Juvenil" => :teenage,
     "En latín" => :in_latin
   }.freeze
+  PAGINATION_ELEMENTS_CSS = ".pagination>li"
+  PARISH_ADDRESS_XPATH = "//p[@class='search-results']/strong[contains(., 'Dirección')]/following-sibling::em"
+  PARISH_NAME_XPATH = "//div[@class='col-xs-12 col-md-offset-1 col-md-5 col-sm-12']/h2"
+  PARISH_MASSES_XPATH = "//div[@id='collapseMisas']/div/table[@class='table']/tbody/tr"
+  PARISH_URLS_XPATH = "//div[@class='col-xs-6 col-sm-6 col-md-6']/a/@href"
+  STATE_ELEMENTS_CSS = "select#estado>option"
 
   def municipality_url(state_id:, municipality_id:, page: nil)
     url = "#{BASE_URL}/busqueda?formType=basic"
@@ -66,7 +66,7 @@ class DondeHayMisaScraper
       mass_data = mass.strip.split("\n").map(&:strip)
 
       {
-        type: TYPES[mass_data[0]],
+        kind: KINDS[mass_data[0]],
         day: DAYS[mass_data[1]],
         time: mass_data[2]
       }
@@ -75,9 +75,9 @@ class DondeHayMisaScraper
     {name: name, address: address, masses: masses}
   end
 
-  def scrape_parish_urls(number_of_pages:)
+  def scrape_parish_urls(state_id:, municipality_id:, number_of_pages:)
     Array.new(number_of_pages).flat_map.with_index do |_, i|
-      url = municipality_url(state_id: 19, municipality_id: 970, page: i + 1)
+      url = municipality_url(state_id: state_id, municipality_id: municipality_id, page: i + 1)
       uri = URI(url)
       response = Net::HTTP.get(uri)
       doc = Nokogiri::HTML(response)
@@ -109,9 +109,9 @@ class DondeHayMisaScraper
     response = Net::HTTP.get(uri)
     municipalities = JSON.parse(response)["municipios"]
     municipalities.map do |municipality|
-      id = municipality["id"].strip
+      id = municipality["id"]
       total_pages = scrape_total_pages(state_id: state_id, municipality_id: id)
-      parish_urls = scrape_parish_urls(number_of_pages: total_pages)
+      parish_urls = scrape_parish_urls(state_id: state_id, municipality_id: id, number_of_pages: total_pages)
 
       {
         id: id,
