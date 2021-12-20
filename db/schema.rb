@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_12_19_174007) do
     t.bigint "parish_id", null: false
     t.integer "kind"
     t.integer "day", null: false
-    t.time "time", null: false
+    t.string "time", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["parish_id"], name: "index_masses_on_parish_id"

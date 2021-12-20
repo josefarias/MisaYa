@@ -93,11 +93,13 @@ class DondeHayMisaScraper
     elements = doc.css(STATE_ELEMENTS_CSS)
     elements.map do |element|
       id = element.attributes["value"].value.strip
+      name = element.content.strip
       next unless id.present?
+      next if name == "Asturias" # dondehaymisa.com has data from Asturias, Spain for some reason.
 
       {
         id: id,
-        name: element.content.strip,
+        name: name,
         municipalities: scrape_municipalities(state_id: id)
       }
     end.compact
