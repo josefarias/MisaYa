@@ -55,7 +55,11 @@ class DondeHayMisaScraperTest < ActiveSupport::TestCase
     Net::HTTP.expects(:get).with(uri_page_1).returns(html_page_1)
     Net::HTTP.expects(:get).with(uri_page_2).returns(html_page_2)
 
-    assert_equal PARISH_URLS.sort, scraper.send(:scrape_parish_urls, number_of_pages: number_of_municipality_page_fixtures).sort
+    assert_equal PARISH_URLS.sort,
+      scraper.send(:scrape_parish_urls,
+        state_id: TEST_STATE_ID,
+        municipality_id: TEST_MUNICIPALITY_ID,
+        number_of_pages: number_of_municipality_page_fixtures).sort
   end
 
   test "#scrape_parish_data should scrape parish data for provided parish url" do
@@ -114,7 +118,6 @@ class DondeHayMisaScraperTest < ActiveSupport::TestCase
   ].freeze
   STATES = [
     {id: "1", name: "Aguascalientes", municipalities: []},
-    {id: "42", name: "Asturias", municipalities: []},
     {id: "2", name: "Baja California", municipalities: []},
     {id: "3", name: "Baja California Sur", municipalities: []},
     {id: "4", name: "Campeche", municipalities: []},
