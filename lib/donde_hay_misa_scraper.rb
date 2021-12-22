@@ -26,12 +26,7 @@ class DondeHayMisaScraper
     "Sábado" => :saturday,
     "Domingo" => :sunday
   }.freeze
-  PAGINATION_ELEMENTS_CSS = ".pagination>li"
-  PARISH_NAME_XPATH = "//div[@class='col-xs-12 col-md-offset-1 col-md-5 col-sm-12']/h2"
-  PARISH_MASSES_XPATH = "//div[@id='collapseMisas']/div/table[@class='table']/tbody/tr"
-  PARISH_URLS_XPATH = "//div[@class='col-xs-6 col-sm-6 col-md-6']/a/@href"
-  STATE_ELEMENTS_CSS = "select#estado>option"
-  TYPES = {
+  KINDS = {
     "Carismática" => :charismatic,
     "Diaria" => :daily,
     "Precepto dominical" => :dominical,
@@ -39,6 +34,12 @@ class DondeHayMisaScraper
     "Juvenil" => :teenage,
     "En latín" => :in_latin
   }.freeze
+  PAGINATION_ELEMENTS_CSS = ".pagination>li"
+  PARISH_ADDRESS_XPATH = "//p[@class='search-results']/strong[contains(., 'Dirección')]/following-sibling::em"
+  PARISH_NAME_XPATH = "//div[@class='col-xs-12 col-md-offset-1 col-md-5 col-sm-12']/h2"
+  PARISH_MASSES_XPATH = "//div[@id='collapseMisas']/div/table[@class='table']/tbody/tr"
+  PARISH_URLS_XPATH = "//div[@class='col-xs-6 col-sm-6 col-md-6']/a/@href"
+  STATE_ELEMENTS_CSS = "select#estado>option"
 
   def municipality_url(state_id:, municipality_id:, page: nil)
     url = "#{BASE_URL}/busqueda?formType=basic"
@@ -57,24 +58,26 @@ class DondeHayMisaScraper
     response = Net::HTTP.get(uri)
     doc = Nokogiri::HTML(response)
     name_element = doc.xpath(PARISH_NAME_XPATH).first
+    address_element = doc.xpath(PARISH_ADDRESS_XPATH).first
     mass_elements = doc.xpath(PARISH_MASSES_XPATH)
     name = name_element.content.strip
+    address = address_element.content.strip
     masses = mass_elements.map(&:content).map do |mass|
       mass_data = mass.strip.split("\n").map(&:strip)
 
       {
-        type: TYPES[mass_data[0]],
+        kind: KINDS[mass_data[0]],
         day: DAYS[mass_data[1]],
         time: mass_data[2]
       }
     end
 
-    {name: name, masses: masses}
+    {name: name, address: address, masses: masses}
   end
 
-  def scrape_parish_urls(number_of_pages:)
+  def scrape_parish_urls(state_id:, municipality_id:, number_of_pages:)
     Array.new(number_of_pages).flat_map.with_index do |_, i|
-      url = municipality_url(state_id: 19, municipality_id: 970, page: i + 1)
+      url = municipality_url(state_id: state_id, municipality_id: municipality_id, page: i + 1)
       uri = URI(url)
       response = Net::HTTP.get(uri)
       doc = Nokogiri::HTML(response)
@@ -90,11 +93,13 @@ class DondeHayMisaScraper
     elements = doc.css(STATE_ELEMENTS_CSS)
     elements.map do |element|
       id = element.attributes["value"].value.strip
+      name = element.content.strip
       next unless id.present?
+      next if name == "Asturias" # dondehaymisa.com has data from Asturias, Spain for some reason.
 
       {
         id: id,
-        name: element.content.strip,
+        name: name,
         municipalities: scrape_municipalities(state_id: id)
       }
     end.compact
@@ -106,9 +111,9 @@ class DondeHayMisaScraper
     response = Net::HTTP.get(uri)
     municipalities = JSON.parse(response)["municipios"]
     municipalities.map do |municipality|
-      id = municipality["id"].strip
+      id = municipality["id"]
       total_pages = scrape_total_pages(state_id: state_id, municipality_id: id)
-      parish_urls = scrape_parish_urls(number_of_pages: total_pages)
+      parish_urls = scrape_parish_urls(state_id: state_id, municipality_id: id, number_of_pages: total_pages)
 
       {
         id: id,

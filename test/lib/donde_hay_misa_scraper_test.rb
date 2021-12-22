@@ -55,7 +55,11 @@ class DondeHayMisaScraperTest < ActiveSupport::TestCase
     Net::HTTP.expects(:get).with(uri_page_1).returns(html_page_1)
     Net::HTTP.expects(:get).with(uri_page_2).returns(html_page_2)
 
-    assert_equal PARISH_URLS.sort, scraper.send(:scrape_parish_urls, number_of_pages: number_of_municipality_page_fixtures).sort
+    assert_equal PARISH_URLS.sort,
+      scraper.send(:scrape_parish_urls,
+        state_id: TEST_STATE_ID,
+        municipality_id: TEST_MUNICIPALITY_ID,
+        number_of_pages: number_of_municipality_page_fixtures).sort
   end
 
   test "#scrape_parish_data should scrape parish data for provided parish url" do
@@ -64,39 +68,41 @@ class DondeHayMisaScraperTest < ActiveSupport::TestCase
     uri = URI(url)
     html = file_fixture("donde_hay_misa/parish_42.txt").read
     name = "Parroquia Mater Admirabilis"
+    address = "Av. Vasconcelos No. 264 Pte., Col. Del Valle, C.P. 66220, San Pedro Garza García, Nuevo León, México"
 
     Net::HTTP.expects(:get).with(uri).returns(html)
     parish_data = scraper.send(:scrape_parish_data, url: url)
 
     assert_equal name, parish_data[:name]
+    assert_equal address, parish_data[:address]
     assert_equal MASSES, parish_data[:masses]
   end
 
   private
 
   MASSES = [
-    {type: :dominical, day: :sunday, time: "09:00 AM"},
-    {type: :kid_friendly, day: :sunday, time: "10:30 AM"},
-    {type: :dominical, day: :sunday, time: "10:30 AM"},
-    {type: :dominical, day: :sunday, time: "11:30 AM"},
-    {type: :dominical, day: :sunday, time: "01:00 PM"},
-    {type: :dominical, day: :sunday, time: "06:00 PM"},
-    {type: :dominical, day: :sunday, time: "07:00 PM"},
-    {type: :dominical, day: :sunday, time: "08:00 PM"},
-    {type: :daily, day: :monday, time: "11:00 AM"},
-    {type: :daily, day: :monday, time: "07:00 PM"},
-    {type: :daily, day: :tuesday, time: "11:00 AM"},
-    {type: :daily, day: :tuesday, time: "07:00 PM"},
-    {type: :daily, day: :wednesday, time: "11:00 AM"},
-    {type: :daily, day: :wednesday, time: "07:00 PM"},
-    {type: :daily, day: :thursday, time: "11:00 AM"},
-    {type: :daily, day: :thursday, time: "07:00 PM"},
-    {type: :daily, day: :friday, time: "11:00 AM"},
-    {type: :daily, day: :friday, time: "07:00 PM"},
-    {type: :daily, day: :saturday, time: "11:00 AM"},
-    {type: :dominical, day: :saturday, time: "05:00 PM"},
-    {type: :dominical, day: :saturday, time: "06:00 PM"},
-    {type: :dominical, day: :saturday, time: "07:00 PM"}
+    {kind: :dominical, day: :sunday, time: "09:00 AM"},
+    {kind: :kid_friendly, day: :sunday, time: "10:30 AM"},
+    {kind: :dominical, day: :sunday, time: "10:30 AM"},
+    {kind: :dominical, day: :sunday, time: "11:30 AM"},
+    {kind: :dominical, day: :sunday, time: "01:00 PM"},
+    {kind: :dominical, day: :sunday, time: "06:00 PM"},
+    {kind: :dominical, day: :sunday, time: "07:00 PM"},
+    {kind: :dominical, day: :sunday, time: "08:00 PM"},
+    {kind: :daily, day: :monday, time: "11:00 AM"},
+    {kind: :daily, day: :monday, time: "07:00 PM"},
+    {kind: :daily, day: :tuesday, time: "11:00 AM"},
+    {kind: :daily, day: :tuesday, time: "07:00 PM"},
+    {kind: :daily, day: :wednesday, time: "11:00 AM"},
+    {kind: :daily, day: :wednesday, time: "07:00 PM"},
+    {kind: :daily, day: :thursday, time: "11:00 AM"},
+    {kind: :daily, day: :thursday, time: "07:00 PM"},
+    {kind: :daily, day: :friday, time: "11:00 AM"},
+    {kind: :daily, day: :friday, time: "07:00 PM"},
+    {kind: :daily, day: :saturday, time: "11:00 AM"},
+    {kind: :dominical, day: :saturday, time: "05:00 PM"},
+    {kind: :dominical, day: :saturday, time: "06:00 PM"},
+    {kind: :dominical, day: :saturday, time: "07:00 PM"}
   ].freeze
   PARISH_URLS = [
     "http://dondehaymisa.com/parroquia/31",
@@ -112,7 +118,6 @@ class DondeHayMisaScraperTest < ActiveSupport::TestCase
   ].freeze
   STATES = [
     {id: "1", name: "Aguascalientes", municipalities: []},
-    {id: "42", name: "Asturias", municipalities: []},
     {id: "2", name: "Baja California", municipalities: []},
     {id: "3", name: "Baja California Sur", municipalities: []},
     {id: "4", name: "Campeche", municipalities: []},
