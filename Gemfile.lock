@@ -227,6 +227,8 @@ GEM
       railties (>= 6.0.0)
     tailwindcss-rails (2.0.0-x64-mingw32)
       railties (>= 6.0.0)
+    tailwindcss-rails (2.0.2-arm64-darwin)
+      railties (>= 6.0.0)
     thor (1.1.0)
     turbo-rails (0.9.0)
       rails (>= 6.0.0)
@@ -259,6 +261,7 @@ GEM
     zeitwerk (2.5.1)
 
 PLATFORMS
+  arm64-darwin
   ruby
   x64-mingw32
 

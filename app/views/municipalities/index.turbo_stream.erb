@@ -1,7 +1,7 @@
 <%= turbo_stream.replace @target_id do %>
   <%= select_tag "municipality",
         options_from_collection_for_select(@municipalities, :id, :name),
-        class: "rounded border-gray-400 text-gray-500",
         include_blank: "Selecciona municipio",
+        class: "form-input text-gray-700 w-full",
         data: {dynamic_select_target: "select"} %>
 <% end %>

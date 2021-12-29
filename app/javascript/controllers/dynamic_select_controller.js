@@ -7,8 +7,19 @@ export default class extends Controller {
     path: String
   }
 
+  connect() {
+    if (this.paramInputTarget.value) {
+      this.fetch()
+    } else {
+      this.selectTarget.disabled = true
+    }
+  }
+
   async fetch() {
+    if (!this.paramInputTarget.value) return
+
     const path = this.pathValue.replace(":param", this.paramInputTarget.value)
     await get(path, {query: {target_id: this.selectTarget.id}, responseKind: "turbo-stream"})
+    this.selectTarget.disabled = false
   }
 }
