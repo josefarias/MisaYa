@@ -1,12 +1,13 @@
-<div class="flex flex-col">
-  <p>
-    Donde estas?
-  </p>
+<div class="flex flex-col items-center justify-center w-full space-y-4">
+  <h2 class="text-4xl text-blue-500">
+    ¿Cuál es tu ubicación?
+  </h2>
 
-  <div data-controller="dynamic-select" data-dynamic-select-path-value="/states/:param/municipalities">
+  <div class="gap-y-2 flex flex-col" data-controller="dynamic-select" data-dynamic-select-path-value="/states/:param/municipalities">
     <%= select_tag "state",
         options_from_collection_for_select(@states, :id, :name),
         include_blank: "Selecciona estado",
+        class: "rounded border-gray-400 text-gray-500",
         data: {
           action: "dynamic-select#fetch",
           dynamic_select_target: "paramInput"
@@ -14,6 +15,7 @@
 
     <%= select_tag "municipality",
           nil,
+          class: "rounded border-gray-400 text-gray-500",
           include_blank: "Selecciona municipio",
           data: {dynamic_select_target: "select"} %>
   </div>
