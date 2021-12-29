@@ -3,20 +3,27 @@
     ¿Cuál es tu ubicación?
   </h2>
 
-  <div class="gap-y-2 flex flex-col" data-controller="dynamic-select" data-dynamic-select-path-value="/states/:param/municipalities">
-    <%= select_tag "state",
+  <%= form_with url: sessions_path,
+        class: "gap-y-2 flex flex-col",
+        data: {
+          controller: "dynamic-select",
+          dynamic_select_path_value: "/states/:param/municipalities"
+        } do |f| %>
+    <%= f.select "state",
         options_from_collection_for_select(@states, :id, :name),
-        include_blank: "Selecciona estado",
+        {include_blank: "Selecciona estado"},
         class: "rounded border-gray-400 text-gray-500",
         data: {
           action: "dynamic-select#fetch",
           dynamic_select_target: "paramInput"
         } %>
 
-    <%= select_tag "municipality",
-          nil,
+    <%= f.select "municipality",
+          [],
+          {include_blank: "Selecciona municipio"},
           class: "rounded border-gray-400 text-gray-500",
-          include_blank: "Selecciona municipio",
           data: {dynamic_select_target: "select"} %>
-  </div>
+
+    <%= f.submit "Enviar", class: "self-end w-fit h-min px-4 py-2 rounded bg-blue-500 text-white" %>
+  <% end %>
 </div>
