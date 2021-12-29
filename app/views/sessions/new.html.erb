@@ -1,0 +1,20 @@
+<div class="flex flex-col">
+  <p>
+    Donde estas?
+  </p>
+
+  <div data-controller="dynamic-select" data-dynamic-select-path-value="/states/:param/municipalities">
+    <%= select_tag "state",
+        options_from_collection_for_select(@states, :id, :name),
+        include_blank: "Selecciona estado",
+        data: {
+          action: "dynamic-select#fetch",
+          dynamic_select_target: "paramInput"
+        } %>
+
+    <%= select_tag "municipality",
+          nil,
+          include_blank: "Selecciona municipio",
+          data: {dynamic_select_target: "select"} %>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<%= turbo_stream.replace @target_id do %>
+  <%= select_tag "municipality",
+        options_from_collection_for_select(@municipalities, :id, :name),
+        include_blank: "Selecciona municipio",
+        data: {dynamic_select_target: "select"} %>
+<% end %>

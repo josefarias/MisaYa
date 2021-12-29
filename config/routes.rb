@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :states, only: [] do
+    member do
+      resources :municipalities, only: :index
+    end
+  end
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root "sessions#new"
 end
