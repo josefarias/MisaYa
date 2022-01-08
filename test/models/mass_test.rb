@@ -7,9 +7,9 @@ class MassTest < ActiveSupport::TestCase
     assert_equal [], Mass.for_day(:monday)
   end
 
-  test "#parsed_time should split out the components of the time string into a hash" do
-    mass = masses(:mater_dominical)
-    time = {hour: 9, minute: 0}
+  test "#parsed_time should split out the components of the time string into a hash in 24 hour format" do
+    mass = masses(:divina_providencia_daily)
+    time = {hour: 20, minute: 30}
     assert_equal time, mass.parsed_time
   end
 
