@@ -8,7 +8,11 @@
   }
 
   .btn-primary {
-    @apply bg-blue-500 text-white hover:bg-blue-800;
+    @apply bg-blue-500 text-white hover:bg-blue-600;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border border-gray-200 text-gray-800 hover:bg-gray-100;
   }
 
   .form-input {
