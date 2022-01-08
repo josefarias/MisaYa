@@ -10,4 +10,21 @@ class Mass < ApplicationRecord
   scope :for_day, ->(day) do
     where(day: day)
   end
+
+  def parsed_time
+    @parsed_time ||= begin
+      time_regex = /(\d{2}):(\d{2}) (\w{2})/
+      hour, minute, period = time.match(time_regex).captures
+      hour, minute = [hour, minute].map(&:to_i)
+
+      hour += 12 if period == "PM" && hour != 12
+
+      {hour:, minute:}
+    end
+  end
+
+  def happened_today?
+    now = Time.current.in_time_zone(municipality.timezone)
+    now.change(hour: parsed_time[:hour], min: parsed_time[:minute]).before?(now)
+  end
 end

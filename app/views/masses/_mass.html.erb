@@ -1,8 +1,6 @@
-<% mass_happened = mass_has_happened?(mass.municipality, mass.time) %>
-
 <%= tag.div class: ["flex flex-col items-center px-3 py-0.5 rounded-lg text-sm whitespace-nowrap",
-                    {"bg-gray-100 text-gray-400": mass_happened},
-                    {"bg-green-100 text-green-800": !mass_happened}] do %>
+                    {"bg-gray-100 text-gray-400": mass.happened_today?},
+                    {"bg-green-100 text-green-800": !mass.happened_today?}] do %>
   <p class="font-medium"><%= mass.time %></p>
   <p><%= t("mass_kind.#{mass.kind}") %></p>
 <% end %>
