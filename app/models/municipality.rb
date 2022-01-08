@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 class Municipality < ApplicationRecord
   belongs_to :state
 
   has_many :parishes
 
   def timezone
-    file = File.read(TIMEZONES_FILE_PATH)
+    path = Rails.root.join(TIMEZONES_FILE_PATH)
+    file = File.read(path)
     yaml = Psych.safe_load(file)
 
     yaml["municipalities"][name.parameterize.underscore] ||
@@ -13,5 +16,5 @@ class Municipality < ApplicationRecord
 
   private
 
-  TIMEZONES_FILE_PATH = Rails.root.join("config/timezones.yml")
+  TIMEZONES_FILE_PATH = "config/timezones.yml"
 end
