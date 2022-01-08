@@ -31,7 +31,7 @@ class DondeHayMisaScraper
     "Diaria" => :daily,
     "Precepto dominical" => :dominical,
     "Con niños" => :kid_friendly,
-    "Juvenil" => :teenage,
+    "Juvenil" => :young_adult,
     "En latín" => :in_latin
   }.freeze
   PAGINATION_ELEMENTS_CSS = ".pagination>li"
