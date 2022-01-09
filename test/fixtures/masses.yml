@@ -2,10 +2,10 @@ mater_dominical:
   parish: mater_admirabilis
   kind: dominical
   day: sunday
-  time: 2000-01-01 09:00:00
+  time: 09:00 AM
 
 divina_providencia_daily:
   parish: divina_providencia
   kind: daily
   day: thursday
-  time: 2000-01-01 20:00:00
+  time: 08:30 PM

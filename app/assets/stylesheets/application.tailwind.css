@@ -2,12 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
 @layer components {
+  .btn {
+    @apply flex whitespace-nowrap flex-nowrap items-center justify-center text-sm leading-5 font-semibold py-2 px-6 rounded-lg shadow-sm hover:shadow hover:cursor-pointer focus:outline-none transition duration-150 ease-in-out;
+  }
+
   .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+    @apply bg-blue-500 text-white hover:bg-blue-600;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border border-gray-200 text-gray-800 hover:bg-gray-100;
+  }
+
+  .form-input {
+    @apply focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 border-gray-300 rounded-md disabled:bg-gray-50 disabled:border-0;
   }
 }
-
-*/

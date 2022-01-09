@@ -1,0 +1,74 @@
+# TIMEZONE REFERENCES:
+#   https://en.wikipedia.org/wiki/Time_in_Mexico
+#   https://www.calendarr.com/mexico/cambio-de-horario/
+#   https://www.mamasha.co/2019/01/regla-basica-para-saber-siempre-cuando-es-el-cambio-de-horario-verano-invierno.html
+#   https://www.excelsior.com.mx/nacional/cuando-es-el-cambio-de-horario-en-la-franja-fronteriza/1479233
+#   Run `TZInfo::Country.get('MX').zone_info.map { [_1.identifier, _1.description] }`
+
+municipalities:
+  # Baja California
+  ensenada: America/Tijuana
+  mexicali: America/Tijuana
+  playas_de_rosarito: America/Tijuana
+  tecate: America/Tijuana
+  tijuana: America/Tijuana
+  # Chihuahua
+  guadalupe: America/Ojinaga
+  juarez: America/Ojinaga
+  ojinaga: America/Ojinaga
+  # Coahuila
+  acuña: America/Matamoros
+  jimenez: America/Matamoros
+  nava: America/Matamoros
+  ocampo: America/Matamoros
+  piedras_negras: America/Matamoros
+  zaragoza: America/Matamoros
+  # Nuevo Leon
+  anahuac: America/Matamoros
+  los_aldamas: America/Matamoros
+  # Tamaulipas
+  camargo: America/Matamoros
+  guerrero: America/Matamoros
+  gustavo_diaz_ordaz: America/Matamoros
+  matamoros: America/Matamoros
+  mier: America/Matamoros
+  miguel_aleman: America/Matamoros
+  nuevo_laredo: America/Matamoros
+  reynosa: America/Matamoros
+  rio_bravo: America/Matamoros
+  valle_hermoso: America/Matamoros
+  # Nayarit
+  bahia_de_banderas: America/Bahia_Banderas
+states:
+  aguascalientes: America/Tijuana
+  baja_california: America/Tijuana
+  baja_california_sur: America/Mazatlan
+  campeche: America/Merida
+  cdmx: America/Mexico_City
+  chiapas: America/Mexico_City
+  chihuahua: America/Chihuahua
+  coahuila: America/Monterrey
+  colima: America/Mexico_City
+  durango: America/Monterrey
+  guanajuato: America/Mexico_City
+  guerrero: America/Mexico_City
+  hidalgo: America/Mexico_City
+  jalisco: America/Mexico_City
+  mexico: America/Mexico_City
+  michoacan: America/Mexico_City
+  morelos: America/Mexico_City
+  nayarit: America/Mazatlan
+  nuevo_leon: America/Monterrey
+  oaxaca: America/Mexico_City
+  puebla: America/Mexico_City
+  queretaro: America/Mexico_City
+  quintana_roo: America/Cancun
+  san_luis_potosi: America/Mexico_City
+  sinaloa: America/Mazatlan
+  sonora: America/Hermosillo
+  tabasco: America/Mexico_City
+  tamaulipas: America/Monterrey
+  tlaxcala: America/Mexico_City
+  veracruz: America/Mexico_City
+  yucatan: America/Merida
+  zacatecas: America/Mexico_City

@@ -1,0 +1,30 @@
+<% masses_for_today = parish.masses.for_day(Time.current.wday) %>
+
+<div class="gap-y-4 rounded-3xl flex flex-col max-w-lg px-6 py-3 border border-gray-100">
+  <h3 class="text-lg font-bold"><%= parish.name.downcase.titleize %></h3>
+  <div class="gap-x-4 flex">
+    <div class="gap-y-8 flex flex-col">
+      <div class="space-y-2">
+        <% if masses_for_today.present? %>
+          <h4 class="font-bold">Misas de hoy</h4>
+          <div class="grid grid-cols-3 gap-2">
+            <%= render masses_for_today %>
+          </div>
+        <% else %>
+          <p class="italic text-gray-500">No tenemos misas registradas para el día de hoy.</p>
+        <% end %>
+      </div>
+
+      <div class="gap-y-2 flex flex-col">
+        <h4 class="font-bold">Dirección</h4>
+        <p><%= parish.address %></p>
+      </div>
+
+      <%= link_to "Ver en mapa",
+            "https://maps.google.com/?q=#{parish.name}+#{parish.address}",
+            class: "w-fit self-end btn btn-secondary",
+            target: :_blank,
+            rel: "noopener noreferrer" %>
+    </div>
+  </div>
+</div>

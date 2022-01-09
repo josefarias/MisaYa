@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    session[:municipality_id] = nil if params[:reset].present?
     municipality_id = session[:municipality_id]
 
     if municipality_id.present?

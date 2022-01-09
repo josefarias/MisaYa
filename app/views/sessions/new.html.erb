@@ -1,29 +1,36 @@
 <div class="flex flex-col items-center justify-center w-full space-y-4">
-  <h2 class="text-4xl text-blue-500">
+  <h1 class="text-4xl font-bold text-gray-900">
     ¿Cuál es tu ubicación?
-  </h2>
+  </h1>
+
+  <p class="max-w-lg mx-auto mt-8 text-xl text-center text-gray-700">
+    MisaYa necesita tu ubicación para sugerir misas católicas cerca de ti.
+  </p>
 
   <%= form_with url: sessions_path,
-        class: "gap-y-2 flex flex-col",
+        class: "gap-y-4 flex flex-col",
         data: {
           controller: "dynamic-select",
           dynamic_select_path_value: "/states/:param/municipalities"
         } do |f| %>
-    <%= f.select "state",
-        options_from_collection_for_select(@states, :id, :name),
-        {include_blank: "Selecciona estado"},
-        class: "rounded border-gray-400 text-gray-500",
-        data: {
-          action: "dynamic-select#fetch",
-          dynamic_select_target: "paramInput"
-        } %>
+    <%= field_set_tag do %>
+      <%= f.label "Estado", for: :state, class: "block text-sm font-medium leading-5 text-gray-700 mb-1" %>
+      <%= f.select "state",
+            options_from_collection_for_select(@states, :id, :name),
+            {include_blank: "Selecciona estado"},
+            class: "form-input text-gray-700 w-full",
+            data: {action: "dynamic-select#fetch", dynamic_select_target: "paramInput"} %>
+    <% end %>
 
-    <%= f.select "municipality",
-          [],
-          {include_blank: "Selecciona municipio"},
-          class: "rounded border-gray-400 text-gray-500",
-          data: {dynamic_select_target: "select"} %>
+    <%= field_set_tag do %>
+      <%= f.label "Municipio", for: :state, class: "block text-sm font-medium leading-5 text-gray-700 mb-1" %>
+      <%= f.select "municipality",
+            [],
+            {include_blank: "Selecciona municipio"},
+            class: "form-input text-gray-700 w-full",
+            data: {dynamic_select_target: "select"} %>
+    <% end %>
 
-    <%= f.submit "Enviar", class: "self-end w-fit h-min px-4 py-2 rounded bg-blue-500 text-white" %>
+    <%= f.submit "Enviar", class: "self-end btn btn-primary" %>
   <% end %>
 </div>
