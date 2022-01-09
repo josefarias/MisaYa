@@ -25,6 +25,7 @@ class Mass < ApplicationRecord
 
   def happened_today?
     now = Time.current.in_time_zone(municipality.timezone)
+    return false unless now.wday == day_before_type_cast
     now.change(hour: parsed_time[:hour], min: parsed_time[:minute]).before?(now)
   end
 end
