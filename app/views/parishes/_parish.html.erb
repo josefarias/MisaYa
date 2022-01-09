@@ -1,9 +1,10 @@
+<% masses_for_today = parish.masses.for_day(Time.current.wday) %>
+
 <div class="gap-y-4 rounded-3xl flex flex-col max-w-lg px-6 py-3 border border-gray-100">
   <h3 class="text-lg font-bold"><%= parish.name.downcase.titleize %></h3>
   <div class="gap-x-4 flex">
     <div class="gap-y-8 flex flex-col">
       <div class="space-y-2">
-        <% masses_for_today = parish.masses.for_day(Time.current.wday) %>
         <% if masses_for_today.present? %>
           <h4 class="font-bold">Misas de hoy</h4>
           <div class="grid grid-cols-3 gap-2">
